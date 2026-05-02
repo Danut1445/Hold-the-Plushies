@@ -1,18 +1,26 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class PlushyPlatoon
 {
-    public GameObject plushy;
+    private GameObject plushy;
     public int count;
     public float interval;
     public float timer;
+    public int enemyID;
 
-    public PlushyPlatoon(GameObject plushy, int count, float interval)
+    public PlushyPlatoon(int enemyID, int count, float interval)
     {
-        this.plushy = plushy;
+        this.enemyID = enemyID;
         this.count = count;
         this.interval = interval;
         this.timer = interval;
+    }
+
+    public void getPlushyAssets()
+    {
+        plushy = GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>().enemyPrefabs[enemyID];
     }
 
     public bool spawnEnemy(float timePassed, Vector3 location)
