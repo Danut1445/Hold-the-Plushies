@@ -18,7 +18,8 @@ public class TurretPossiblePositionScript : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>().spendMoney(turret.cost))
         {
-            GameObject.Instantiate(turret.turretToSpawn, gameObject.transform.position, Quaternion.identity);
+            GameObject spawnedTurret = GameObject.Instantiate(turret.turretToSpawn, gameObject.transform.position, Quaternion.identity);
+            spawnedTurret.GetComponent<TurretLogicScript>().setCosts(turret.cost, gameObject, GameObject.FindGameObjectWithTag("Logic"));
             gameObject.SetActive(false);
             return true;
         }

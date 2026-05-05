@@ -19,7 +19,7 @@ public class PlushyScript : MonoBehaviour
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         foreach (GameObject turret in turrets)
         {
-            turret.GetComponent<TurretBasicScript>().addTarget(gameObject);
+            turret.transform.GetChild(0).GetComponent<TurretBasicScript>().addTarget(gameObject);
         }
 
         levelLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>();
