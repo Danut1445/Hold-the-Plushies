@@ -3,12 +3,15 @@ using UnityEngine.UI;
 
 public class TurretLogicScript : MonoBehaviour
 {
-    public int upgradeCost;
-    public int refund;
+    public int upgradeAmmount1;
+    public float upgradeAmmount2;
     public TMPro.TMP_Text upgradeCostText;
     public TMPro.TMP_Text refundText;
+
     private int level;
     private int maxLevel;
+    private int upgradeCost;
+    private int refund;
     private GameObject turretObject;
     private GameObject UITurret;
     private GameObject turretPossiblePosition;
@@ -37,7 +40,7 @@ public class TurretLogicScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        bool showUI = UITurret.active;
+        bool showUI = UITurret.activeSelf;
         showUI = showUI ^ true;
         UITurret.SetActive(showUI);
     }
@@ -48,8 +51,7 @@ public class TurretLogicScript : MonoBehaviour
         {
             upgradeCost *= 2;
             refund *= 2;
-            turretObject.GetComponent<TurretBasicScript>().bulletDamage += 15;
-            turretObject.GetComponent<TurretBasicScript>().reloadTime -= 0.3f;
+            turretObject.GetComponent<UpgradableTurretScript>().UpgradeTurret(upgradeAmmount1, upgradeAmmount2);
             level += 1;
             upgradeCostText.SetText(upgradeCost.ToString());
             refundText.SetText(refund.ToString());
@@ -66,5 +68,15 @@ public class TurretLogicScript : MonoBehaviour
         logic.GetComponent<LevelLogicScript>().gainMoney(refund);
         turretPossiblePosition.SetActive(true);
         Destroy(gameObject);
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public GameObject GetTurretObject()
+    {
+        return turretObject;
     }
 }

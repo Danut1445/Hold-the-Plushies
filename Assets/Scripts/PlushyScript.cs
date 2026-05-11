@@ -19,7 +19,7 @@ public class PlushyScript : MonoBehaviour
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         foreach (GameObject turret in turrets)
         {
-            turret.transform.GetChild(0).GetComponent<TurretBasicScript>().addTarget(gameObject);
+            turret.transform.GetChild(0).GetComponent<TurretBasicScript>().AddTarget(gameObject);
         }
 
         levelLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>();
@@ -31,7 +31,7 @@ public class PlushyScript : MonoBehaviour
         ballonMovement.move();
     }
 
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
@@ -41,7 +41,7 @@ public class PlushyScript : MonoBehaviour
         }
     }
 
-    public int doDamageToBase()
+    public int DoDamageToBase()
     {
         Destroy(gameObject);
         return baseDamage;

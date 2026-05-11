@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TurretBasicScript : MonoBehaviour
+public class TurretBasicScript : UpgradableTurretScript
 {
     public int bulletDamage;
     public float bulletSpeed;
@@ -12,6 +10,7 @@ public class TurretBasicScript : MonoBehaviour
     public float range;
     public GameObject bullet;
     public float reloadTime;
+
     private GameObject currentTarget;
     private float timeSinceLastShot;
     private bool loaded;
@@ -20,6 +19,9 @@ public class TurretBasicScript : MonoBehaviour
     private Queue<GameObject> targets;
     private bool wasInRange;
     private Rigidbody2D turretBody;
+    private LinkedList<GameObject> officers;
+    private GameObject supremeOfficer;
+    private int supremeOfficerLevel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,6 +46,25 @@ public class TurretBasicScript : MonoBehaviour
         foreach (BallonComparableDistance plushy in comparablePlushies)
         {
             targets.Enqueue(plushy.getPlushy());
+        }
+
+        officers = new LinkedList<GameObject>();
+        GameObject[] officersArray = GameObject.FindGameObjectsWithTag("Leader");
+        supremeOfficerLevel = 0;
+
+        foreach (GameObject officer in officersArray)
+        {
+            if (!officer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().CheckInRange(gameObject, 0.0f))
+            {
+                continue;
+            }
+
+            officers.AddLast(officer);
+            if (officer.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
+            {
+                supremeOfficer = officer;
+                supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
+            }
         }
     }
 
@@ -142,8 +163,39 @@ public class TurretBasicScript : MonoBehaviour
         }
     }
 
-    public void addTarget(GameObject target)
+    public void AddTarget(GameObject target)
     {
         targets.Enqueue(target);
+    }
+
+    public void AddOfficer(GameObject officer)
+    {
+        officers.AddLast(officer);
+        if (officer.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
+        {
+            supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
+            supremeOfficer = officer;
+        }
+    }
+
+    public Vector2 GetTurretLocation()
+    {
+        return turretLocation;
+    }
+
+    public override void UpgradeTurret(int value1, float value2)
+    {
+        if (supremeOfficer != null)
+        {
+            supremeOfficer.GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+        }
+
+        bulletDamage += value1;
+        reloadTime -= value2;
+
+        if (supremeOfficer != null)
+        {
+            supremeOfficer.GetComponent<PlushyOfficerScript>().BuffTurret(gameObject.transform.parent.gameObject);
+        }
     }
 }

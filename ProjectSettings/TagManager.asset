@@ -8,6 +8,7 @@ TagManager:
   - Logic
   - EnemyPlushy
   - Turret
+  - Leader
   layers:
   - Default
   - TransparentFX

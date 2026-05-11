@@ -40,7 +40,7 @@ public class BulletScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyPlushy")
         {
-            collision.gameObject.GetComponent<PlushyScript>().takeDamage(damage);
+            collision.gameObject.GetComponent<PlushyScript>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

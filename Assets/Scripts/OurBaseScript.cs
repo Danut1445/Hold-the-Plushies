@@ -20,7 +20,7 @@ public class OurBaseScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyPlushy")
         {
-            levelLogic.takeDamage(collision.gameObject.GetComponent<PlushyScript>().doDamageToBase());
+            levelLogic.takeDamage(collision.gameObject.GetComponent<PlushyScript>().DoDamageToBase());
         }
     }
 }
