@@ -8,7 +8,7 @@ public class TurretLogicScript : MonoBehaviour
     public TMPro.TMP_Text upgradeCostText;
     public TMPro.TMP_Text refundText;
 
-    private int level;
+    private int level = 1;
     private int maxLevel;
     private int upgradeCost;
     private int refund;
@@ -16,14 +16,16 @@ public class TurretLogicScript : MonoBehaviour
     private GameObject UITurret;
     private GameObject turretPossiblePosition;
     private GameObject logic;
+    private GameObject rangeDisplay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         turretObject = gameObject.transform.GetChild(0).gameObject;
         UITurret = gameObject.transform.GetChild(1).gameObject;
-        level = 1;
         maxLevel = 3; // Change to depend on the player logic
+        rangeDisplay = UITurret.transform.GetChild(4).gameObject;
+        SetRange(turretObject.GetComponent<UpgradableTurretScript>().GetRange());
 
         UITurret.SetActive(false);
     }
@@ -51,8 +53,8 @@ public class TurretLogicScript : MonoBehaviour
         {
             upgradeCost *= 2;
             refund *= 2;
-            turretObject.GetComponent<UpgradableTurretScript>().UpgradeTurret(upgradeAmmount1, upgradeAmmount2);
             level += 1;
+            turretObject.GetComponent<UpgradableTurretScript>().UpgradeTurret(upgradeAmmount1, upgradeAmmount2);
             upgradeCostText.SetText(upgradeCost.ToString());
             refundText.SetText(refund.ToString());
             if (level == maxLevel)
@@ -67,6 +69,7 @@ public class TurretLogicScript : MonoBehaviour
     {
         logic.GetComponent<LevelLogicScript>().gainMoney(refund);
         turretPossiblePosition.SetActive(true);
+        turretObject.GetComponent<UpgradableTurretScript>().RemoveTurret();
         Destroy(gameObject);
     }
 
@@ -78,5 +81,10 @@ public class TurretLogicScript : MonoBehaviour
     public GameObject GetTurretObject()
     {
         return turretObject;
+    }
+
+    public void SetRange(float range)
+    {
+        rangeDisplay.transform.localScale = new Vector3(2 * range, 2 * range, 1);
     }
 }

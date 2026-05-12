@@ -21,7 +21,7 @@ public class LevelLogicScript : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Debug.Log("Game Over!");
+            //Debug.Log("Game Over!");
         }
         healthText.SetText(currentHealth.ToString());
     }

@@ -54,16 +54,23 @@ public class TurretBasicScript : UpgradableTurretScript
 
         foreach (GameObject officer in officersArray)
         {
-            if (!officer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().CheckInRange(gameObject, 0.0f))
+            PlushyOfficerScript plushyOfficer = officer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>();
+            if (!plushyOfficer.CheckInRange(gameObject, 0.0f))
             {
                 continue;
             }
 
             officers.AddLast(officer);
+            plushyOfficer.AddNewTurret(gameObject.transform.parent.gameObject);
             if (officer.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
             {
+                if (supremeOfficer != null)
+                {
+                    supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+                }
                 supremeOfficer = officer;
                 supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
+                plushyOfficer.BuffTurret(gameObject.transform.parent.gameObject);
             }
         }
     }
@@ -82,8 +89,6 @@ public class TurretBasicScript : UpgradableTurretScript
             if (targets.Count == 0)
             {
                 return;
-                activated = false;
-                loaded = true;
             }
 
             currentTarget = targets.Dequeue();
@@ -95,8 +100,6 @@ public class TurretBasicScript : UpgradableTurretScript
             if (targets.Count == 0)
             {
                 return;
-                activated = false;
-                loaded = true;
             }
 
             GameObject nextCandidate;
@@ -168,13 +171,43 @@ public class TurretBasicScript : UpgradableTurretScript
         targets.Enqueue(target);
     }
 
-    public void AddOfficer(GameObject officer)
+    public void AddOfficer(GameObject officer, PlushyOfficerScript officerScript)
     {
         officers.AddLast(officer);
         if (officer.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
         {
+            Debug.Log("We have a new supreme officer!");
+            if (supremeOfficer != null)
+            {
+                supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+            }
             supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
             supremeOfficer = officer;
+            officerScript.BuffTurret(gameObject.transform.parent.gameObject);
+        }
+    }
+
+    public void RemoveOfficer(GameObject officer)
+    {
+        officers.Remove(officers.Find(officer));
+        if (officer == supremeOfficer)
+        {
+            supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+            supremeOfficer = null;
+            supremeOfficerLevel = 0;
+            foreach (GameObject newSupreme in officers)
+            {
+                if (newSupreme.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
+                {
+                    if (supremeOfficer != null)
+                    {
+                        supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+                    }
+                    supremeOfficer = newSupreme;
+                    supremeOfficerLevel = newSupreme.GetComponent<TurretLogicScript>().GetLevel();
+                    supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().BuffTurret(gameObject.transform.parent.gameObject);
+                }
+            }
         }
     }
 
@@ -187,7 +220,7 @@ public class TurretBasicScript : UpgradableTurretScript
     {
         if (supremeOfficer != null)
         {
-            supremeOfficer.GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+            supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
         }
 
         bulletDamage += value1;
@@ -195,7 +228,63 @@ public class TurretBasicScript : UpgradableTurretScript
 
         if (supremeOfficer != null)
         {
-            supremeOfficer.GetComponent<PlushyOfficerScript>().BuffTurret(gameObject.transform.parent.gameObject);
+            supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().BuffTurret(gameObject.transform.parent.gameObject);
         }
+    }
+
+    public override void RemoveTurret()
+    {
+        foreach (GameObject officer in officers)
+        {
+            officer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().RemoveBuffedTurret(gameObject.transform.parent.gameObject);
+        }
+    }
+
+    public override float GetRange()
+    {
+        return range;
+    }
+
+    public GameObject GetSupremeOfficer()
+    {
+        return supremeOfficer;
+    }
+
+    public void UpgradeSupremeOfficer()
+    {
+        supremeOfficerLevel += 1;
+    }
+
+    public void NewSupremeOfficer(GameObject officer)
+    {
+        if (officer.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
+        {
+            if (supremeOfficer != null)
+            {
+                supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
+            }
+            supremeOfficer = officer;
+            supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
+        }
+    }
+
+    public int GetDamage()
+    {
+        return bulletDamage;
+    }
+
+    public void SetDamage(int damage)
+    {
+        bulletDamage = damage;
+    }
+
+    public float GetReload()
+    {
+        return reloadTime;
+    }
+
+    public void SetReload(float reload)
+    {
+        reloadTime = reload;
     }
 }
