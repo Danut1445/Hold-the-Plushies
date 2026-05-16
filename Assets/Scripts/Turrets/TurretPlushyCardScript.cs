@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class TurretPlushyCardScript : MonoBehaviour
 {
-    private Collider2D cardCollider;
-    private Vector3 startDragPosition;
     public GameObject turretToSpawn;
     public int cost;
+    public TMPro.TMP_Text costText;
+
+    private Collider2D cardCollider;
+    private Vector3 startDragPosition;
+    private GameObject UICard;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         cardCollider = gameObject.GetComponent<BoxCollider2D>();
+        UICard = gameObject.transform.GetChild(0).gameObject;
+        costText.SetText(cost.ToString());
     }
 
     private void OnMouseDown()
     {
+        UICard.SetActive(false);
         startDragPosition = transform.position;
         transform.position = GetMousePossitionInWorldSpace();
     }
@@ -26,6 +32,7 @@ public class TurretPlushyCardScript : MonoBehaviour
 
     private void OnMouseUp()
     {
+        UICard.SetActive(true);
         cardCollider.enabled = false;
         Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
         cardCollider.enabled = true;

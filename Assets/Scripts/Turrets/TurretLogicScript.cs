@@ -83,6 +83,11 @@ public class TurretLogicScript : MonoBehaviour
         return turretObject;
     }
 
+    public GameObject GetUI()
+    {
+        return UITurret;
+    }
+
     public void SetRange(float range)
     {
         rangeDisplay.transform.localScale = new Vector3(2 * range, 2 * range, 1);

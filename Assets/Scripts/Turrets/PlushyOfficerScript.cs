@@ -48,7 +48,7 @@ public class PlushyOfficerScript : UpgradableTurretScript
 
     public void BuffTurret(GameObject turret)
     {
-        TurretBasicScript turretScript = turret.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<TurretBasicScript>();
+        TurretBasicScript turretScript = turret.transform.GetChild(0).gameObject.GetComponent<TurretBasicScript>();
         int damage = turretScript.GetDamage();
         float reload = turretScript.GetReload();
 

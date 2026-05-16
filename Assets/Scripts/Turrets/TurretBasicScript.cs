@@ -70,6 +70,7 @@ public class TurretBasicScript : UpgradableTurretScript
                 }
                 supremeOfficer = officer;
                 supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
+                SetSupremeOfficerMark();
                 plushyOfficer.BuffTurret(gameObject.transform.parent.gameObject);
             }
         }
@@ -176,13 +177,13 @@ public class TurretBasicScript : UpgradableTurretScript
         officers.AddLast(officer);
         if (officer.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
         {
-            Debug.Log("We have a new supreme officer!");
             if (supremeOfficer != null)
             {
                 supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
             }
             supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
             supremeOfficer = officer;
+            SetSupremeOfficerMark();
             officerScript.BuffTurret(gameObject.transform.parent.gameObject);
         }
     }
@@ -195,6 +196,7 @@ public class TurretBasicScript : UpgradableTurretScript
             supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().UnbuffTurret(gameObject.transform.parent.gameObject);
             supremeOfficer = null;
             supremeOfficerLevel = 0;
+            ResetSupremeOfficerMark();
             foreach (GameObject newSupreme in officers)
             {
                 if (newSupreme.GetComponent<TurretLogicScript>().GetLevel() > supremeOfficerLevel)
@@ -206,6 +208,7 @@ public class TurretBasicScript : UpgradableTurretScript
                     supremeOfficer = newSupreme;
                     supremeOfficerLevel = newSupreme.GetComponent<TurretLogicScript>().GetLevel();
                     supremeOfficer.GetComponent<TurretLogicScript>().GetTurretObject().GetComponent<PlushyOfficerScript>().BuffTurret(gameObject.transform.parent.gameObject);
+                    SetSupremeOfficerMark();
                 }
             }
         }
@@ -265,6 +268,7 @@ public class TurretBasicScript : UpgradableTurretScript
             }
             supremeOfficer = officer;
             supremeOfficerLevel = officer.GetComponent<TurretLogicScript>().GetLevel();
+            SetSupremeOfficerMark();
         }
     }
 
@@ -286,5 +290,19 @@ public class TurretBasicScript : UpgradableTurretScript
     public void SetReload(float reload)
     {
         reloadTime = reload;
+    }
+
+    public void SetSupremeOfficerMark()
+    {
+        GameObject supremeOfficerMark = gameObject.transform.parent.GetChild(1).GetChild(5).gameObject;
+        supremeOfficerMark.transform.position = supremeOfficer.transform.position;
+        supremeOfficerMark.SetActive(true);
+    }
+
+    public void ResetSupremeOfficerMark()
+    {
+        GameObject supremeOfficerMark = gameObject.transform.parent.GetChild(1).GetChild(5).gameObject;
+        supremeOfficerMark.transform.position = new Vector3(0, 0, 0);
+        supremeOfficerMark.SetActive(false);
     }
 }
