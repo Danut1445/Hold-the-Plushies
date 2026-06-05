@@ -9,8 +9,10 @@ public static class PlayerStats
     private static float populatioPower;
     private static int leather;
     private static int plush;
+    private static int population;
     private static float damageBoost;
     private static float reloadBoost;
+    private static int currentDay;
     private static LinkedList<BuildingBasicScript> buildings;
 
     public static void NewGame()
@@ -22,6 +24,18 @@ public static class PlayerStats
         plush = 100;
         damageBoost = 0;
         reloadBoost = 0;
+        currentDay = 1;
+        population = 20;
+    }
+
+    public static void PassDay()
+    {
+        currentDay++;
+
+        foreach (BuildingBasicScript building in buildings)
+        {
+            building.PassDay();
+        }
     }
 
     public static float GetReputation()
@@ -43,7 +57,7 @@ public static class PlayerStats
     public static void ChangePopulationPower(float change)
     {
         populatioPower += change;
-        populatioPower = MathFunctions.CheckInterval(populatioPower, 100f);
+        populatioPower = MathFunctions.CheckRightSideInterval(populatioPower, 100f);
     }
 
     public static float GetLeather()
@@ -110,5 +124,29 @@ public static class PlayerStats
     public static void SetReloadBoost(float value)
     {
         reloadBoost = value;
+    }
+
+    public static int GetPopulation()
+    {
+        return population;
+    }
+
+    public static void ChangePopulation(float procent)
+    {
+        population = (int) Math.Floor(population * (100f + procent) / 100f);
+    }
+
+    public static void ChangePopulation(int value)
+    {
+        population += value;
+        if (population < 0)
+        {
+            population = 0;
+        }
+    }
+
+    public static int GetCurrentDay()
+    {
+        return currentDay;
     }
 }

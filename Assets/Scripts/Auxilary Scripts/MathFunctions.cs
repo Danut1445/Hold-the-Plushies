@@ -20,4 +20,17 @@ public static class MathFunctions
         }
         return value;
     }
+
+    public static float CheckRightSideInterval(float value, float limit)
+    {
+        if (value > limit)
+        {
+            value = limit;
+        }
+        if (value < 0f)
+        {
+            value = 0f;
+        }
+        return value;
+    }
 }
