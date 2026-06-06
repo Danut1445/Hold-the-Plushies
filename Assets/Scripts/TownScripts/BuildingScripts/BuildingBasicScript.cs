@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public abstract class BuildingBasicScript
+public abstract class BuildingBasicScript : MonoBehaviour
 {
-    private int level;
-    private int cost;
-    private string name;
-    private int ID;
+    protected int level;
+    protected int cost;
+    protected int ID;
 
     public abstract void CreateBuilding();
 
