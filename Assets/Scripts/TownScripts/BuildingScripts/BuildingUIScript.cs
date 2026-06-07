@@ -7,6 +7,10 @@ public class BuildingUIScript : MonoBehaviour
     public GameObject buildlingUI;
     public Sprite[] buildingSprites = new Sprite[6];
     public GameObject buildingButton;
+    public GameObject notUnlockedPanel;
+    public GameObject upgradeButton;
+    public GameObject stopButton;
+    public GameObject restartButton;
     public TMPro.TMP_Text input1;
     public TMPro.TMP_Text input2;
     public TMPro.TMP_Text input3;
@@ -35,6 +39,36 @@ public class BuildingUIScript : MonoBehaviour
     public void CloseBuildingUI()
     {
         buildlingUI.SetActive(false);
+    }
+
+    public void CreateBuilding()
+    {
+        notUnlockedPanel.SetActive(false);
+    }
+
+    public void UpgradeBuilding()
+    {
+
+    }
+
+    public void SetUnlocked(bool value)
+    {
+        notUnlockedPanel.SetActive(value);
+    }
+
+    public void SetUpgradeButton(bool value)
+    {
+       upgradeButton.SetActive(value);
+    }
+
+    public void SetStopButton(bool value)
+    {
+        stopButton.SetActive(value);
+    }
+
+    public void SetRestartButton(bool value)
+    {
+        restartButton.SetActive(value);
     }
 
     public void SetImage(int level)

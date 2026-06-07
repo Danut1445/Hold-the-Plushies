@@ -9,6 +9,7 @@ TagManager:
   - EnemyPlushy
   - Turret
   - Leader
+  - UILogic
   layers:
   - Default
   - TransparentFX

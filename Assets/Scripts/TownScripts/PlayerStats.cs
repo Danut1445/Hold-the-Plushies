@@ -13,11 +13,11 @@ public static class PlayerStats
     private static float damageBoost;
     private static float reloadBoost;
     private static int currentDay;
-    private static LinkedList<BuildingBasicScript> buildings;
+    private static BuildingBasicScript[] buildings;
 
     public static void NewGame()
     {
-        buildings = new LinkedList<BuildingBasicScript>();
+        buildings = new BuildingBasicScript[10];
         reputation = 0;
         populatioPower = 50;
         leather = 100;
@@ -31,11 +31,26 @@ public static class PlayerStats
     public static void PassDay()
     {
         currentDay++;
+        int remainingPopulation = population;
 
         foreach (BuildingBasicScript building in buildings)
         {
-            building.PassDay();
+            if (building == null)
+            {
+                continue;
+            }
+            remainingPopulation = building.PassDay(remainingPopulation);
         }
+    }
+
+    public static void AddBuilding(BuildingBasicScript buildingScript)
+    {
+        buildings[buildingScript.GetID()] = buildingScript;
+    }
+
+    public static BuildingBasicScript GetBuilding(int ID)
+    {
+        return buildings[ID];
     }
 
     public static float GetReputation()

@@ -24,4 +24,10 @@ public class TownLogicScript : MonoBehaviour
         currentDayText.SetText(PlayerStats.GetCurrentDay().ToString());
         nextAttackText.SetText(2.ToString());
     }
+
+    public void UpdateUIResources()
+    {
+        plushText.SetText(PlayerStats.GetPlush().ToString());
+        leatherText.SetText(PlayerStats.GetLeather().ToString());
+    }
 }
