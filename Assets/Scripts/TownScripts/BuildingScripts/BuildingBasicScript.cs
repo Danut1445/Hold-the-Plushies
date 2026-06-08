@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public abstract class BuildingBasicScript : MonoBehaviour
 {
@@ -28,5 +29,16 @@ public abstract class BuildingBasicScript : MonoBehaviour
     public bool GetIsActive()
     {
         return isActive;
+    }
+
+    public float CheckEnoughResources(float resourcesWeHave, float resourcesWeNeed, float fulilmentInput)
+    {
+        float fulfilment = 100f;
+        if (resourcesWeHave < resourcesWeNeed)
+        {
+            fulfilment = resourcesWeHave / resourcesWeNeed * 100;
+        }
+        fulfilment = Math.Min(fulilmentInput, fulfilment);
+        return fulfilment;
     }
 }

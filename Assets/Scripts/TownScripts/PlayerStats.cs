@@ -10,8 +10,9 @@ public static class PlayerStats
     private static int leather;
     private static int plush;
     private static int population;
-    private static float damageBoost;
-    private static float reloadBoost;
+    private static int weapons;
+    private static int damageBoost;
+    private static int reloadBoost;
     private static int currentDay;
     private static BuildingBasicScript[] buildings;
 
@@ -22,6 +23,7 @@ public static class PlayerStats
         populatioPower = 50;
         leather = 100;
         plush = 100;
+        weapons = 0;
         damageBoost = 0;
         reloadBoost = 0;
         currentDay = 1;
@@ -60,7 +62,7 @@ public static class PlayerStats
 
     public static void ChangeReputation(float change)
     {
-        reputation = reputation + Math.Abs((MathFunctions.Sigmoid(reputation / 20f) - 0.5f) * 2f) * change;
+        reputation = reputation + (1f - Math.Abs((MathFunctions.Sigmoid(reputation / 20f) - 0.5f) * 2f)) * change;
         reputation = MathFunctions.CheckInterval(reputation, 100f);
     }
 
@@ -121,22 +123,32 @@ public static class PlayerStats
         }
     }
 
-    public static float GetDamageBoost()
+    public static int GetNumberWeapons()
+    {
+        return weapons;
+    }
+    
+    public static void SetNumberWeapons(int value)
+    {
+        weapons = value;
+    }
+
+    public static int GetDamageBoost()
     {
         return damageBoost;
     }
 
-    public static void SetDamageBoost(float value)
+    public static void SetDamageBoost(int value)
     {
         damageBoost = value;
     }
 
-    public static float GetReloadBoost()
+    public static int GetReloadBoost()
     {
         return reloadBoost;
     }
 
-    public static void SetReloadBoost(float value)
+    public static void SetReloadBoost(int value)
     {
         reloadBoost = value;
     }

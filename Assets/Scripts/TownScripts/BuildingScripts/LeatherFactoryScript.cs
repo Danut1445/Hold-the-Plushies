@@ -1,35 +1,39 @@
 using UnityEngine;
 using System;
 
-public class PlushFactoryScript : BuildingBasicScript
+public class LeatherFactoryScript : BuildingBasicScript
 {
     private BuildingUIScript UIScript;
     private TownLogicScript townLogicScript;
     private int populationInput;
-    private int plushOutput;
+    private int plushyInput;
+    private int leatherOutput;
 
     void Start()
     {
-        PlushFactoryScript plushyFactory = (PlushFactoryScript) PlayerStats.GetBuilding(1);
-        if (plushyFactory == null)
+        LeatherFactoryScript leatherFactory = (LeatherFactoryScript)PlayerStats.GetBuilding(2);
+        if (leatherFactory == null)
         {
             level = 0;
             maxLevel = 5;
-            cost = 100;
-            ID = 1;
-            populationInput = 10;
-            plushOutput = 50;
+            cost = 150;
+            ID = 2;
+            populationInput = 20;
+            plushyInput = 20;
+            leatherOutput = 10;
             fulfilment = 0;
-            upgradeAmmount = 35;
+            upgradeAmmount = 25;
             isActive = false;
-        } else
+        }
+        else
         {
-            this.level = plushyFactory.level;
-            this.maxLevel = plushyFactory.maxLevel;
-            this.cost = plushyFactory.cost;
-            this.populationInput = plushyFactory.populationInput;
-            this.plushOutput = plushyFactory.plushOutput;
-            this.isActive = plushyFactory.isActive;
+            this.level = leatherFactory.level;
+            this.maxLevel = leatherFactory.maxLevel;
+            this.cost = leatherFactory.cost;
+            this.populationInput = leatherFactory.populationInput;
+            this.plushyInput = leatherFactory.plushyInput;
+            this.leatherOutput = leatherFactory.leatherOutput;
+            this.isActive = leatherFactory.isActive;
         }
         PlayerStats.AddBuilding(this);
 
@@ -40,7 +44,8 @@ public class PlushFactoryScript : BuildingBasicScript
             UIScript.CreateBuilding();
             UIScript.SetFulfilment(fulfilment);
             UIScript.SetInput1(populationInput);
-            UIScript.SetOutput1(plushOutput);
+            UIScript.SetInput2(plushyInput);
+            UIScript.SetOutput1(leatherOutput);
             UIScript.SetUpgradeCost(cost);
             UIScript.SetLevel(level, maxLevel);
         }
@@ -63,7 +68,8 @@ public class PlushFactoryScript : BuildingBasicScript
             fulfilment = 100;
             UIScript.SetFulfilment(fulfilment);
             UIScript.SetInput1(populationInput);
-            UIScript.SetOutput1(plushOutput);
+            UIScript.SetInput2(plushyInput);
+            UIScript.SetOutput1(leatherOutput);
             UIScript.SetUpgradeCost(cost);
             isActive = true;
             UIScript.CreateBuilding();
@@ -87,7 +93,8 @@ public class PlushFactoryScript : BuildingBasicScript
             UIScript.SetLevel(level, maxLevel);
             fulfilment = 100;
             populationInput += populationInput * upgradeAmmount / 100;
-            plushOutput += plushOutput * upgradeAmmount / 100;
+            plushyInput += plushyInput * upgradeAmmount / 100;
+            leatherOutput += leatherOutput * upgradeAmmount / 100;
             cost = cost * 2;
 
             if (level >= maxLevel)
@@ -98,7 +105,8 @@ public class PlushFactoryScript : BuildingBasicScript
 
             UIScript.SetFulfilment(fulfilment);
             UIScript.SetInput1(populationInput);
-            UIScript.SetOutput1(plushOutput);
+            UIScript.SetInput2(plushyInput);
+            UIScript.SetOutput1(leatherOutput);
             UIScript.SetUpgradeCost(cost);
             UIScript.CreateBuilding();
             UIScript.SetImage(level);
@@ -127,28 +135,34 @@ public class PlushFactoryScript : BuildingBasicScript
 
     public override int PassDay(int population)
     {
-        if (!isActive) {
+        if (!isActive)
+        {
             return population;
         }
 
         float fulfilmentFloat = CheckEnoughResources(population, populationInput, 100f);
+        fulfilmentFloat = CheckEnoughResources(PlayerStats.GetPlush(), plushyInput, fulfilmentFloat);
         if (fulfilmentFloat < 100f)
         {
-            fulfilment = (int) Math.Round(fulfilmentFloat);
-            UIScript.SetInput1((int) (fulfilmentFloat * populationInput / 100));
-            UIScript.SetOutput1((int) (plushOutput * fulfilmentFloat / 100));
+            fulfilment = (int)Math.Round(fulfilmentFloat);
+            UIScript.SetInput1((int)(fulfilmentFloat * populationInput / 100));
+            UIScript.SetInput2((int)(fulfilmentFloat * plushyInput / 100));
+            UIScript.SetOutput1((int)(leatherOutput * fulfilmentFloat / 100));
             UIScript.SetFulfilment(fulfilment);
 
-            PlayerStats.ProducePlush(plushOutput * fulfilment / 100);
-            return 0;
+            PlayerStats.ConsumePlush((int)(fulfilmentFloat * plushyInput / 100));
+            PlayerStats.ProduceLeather((int)(leatherOutput * fulfilmentFloat / 100));
+            return Math.Max(population - ((int)(fulfilmentFloat * populationInput / 100)), 0);
         }
 
         fulfilment = 100;
         UIScript.SetInput1(populationInput);
-        UIScript.SetOutput1(plushOutput);
+        UIScript.SetInput2(plushyInput);
+        UIScript.SetOutput1(leatherOutput);
         UIScript.SetFulfilment(fulfilment);
 
-        PlayerStats.ProducePlush(plushOutput);
+        PlayerStats.ConsumePlush(plushyInput);
+        PlayerStats.ProduceLeather(leatherOutput);
 
         return population - populationInput;
     }
