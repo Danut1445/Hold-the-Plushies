@@ -14,11 +14,15 @@ public static class PlayerStats
     private static int damageBoost;
     private static int reloadBoost;
     private static int currentDay;
+    private static int nextAttackDay;
+    private static int currentLevel = 0;
     private static BuildingBasicScript[] buildings;
+    private static BuildingSaveScript[] buildingSaves;
 
     public static void NewGame()
     {
         buildings = new BuildingBasicScript[10];
+        buildingSaves = new BuildingSaveScript[10];
         reputation = 0;
         populatioPower = 50;
         leather = 100;
@@ -27,7 +31,9 @@ public static class PlayerStats
         damageBoost = 0;
         reloadBoost = 0;
         currentDay = 1;
-        population = 20;
+        nextAttackDay = 5;
+        currentLevel = 1;
+        population = 50;
     }
 
     public static void PassDay()
@@ -53,6 +59,22 @@ public static class PlayerStats
     public static BuildingBasicScript GetBuilding(int ID)
     {
         return buildings[ID];
+    }
+
+    public static void SaveAllBuildings()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (buildings[i] != null)
+            {
+                buildingSaves[i] = buildings[i].SaveBuilding();
+            }
+        }
+    }
+
+    public static BuildingSaveScript GetSavedBuilding(int ID)
+    {
+        return buildingSaves[ID];
     }
 
     public static float GetReputation()
@@ -175,5 +197,26 @@ public static class PlayerStats
     public static int GetCurrentDay()
     {
         return currentDay;
+    }
+
+    public static int GetNextAttackDay()
+    {
+        return nextAttackDay;
+    }
+
+    public static void SetNextAttackDay(int value)
+    {
+        nextAttackDay = value;
+        //currentLevel++;
+    }
+
+    public static int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
+    public static void ChangeCurrentLevel(int value)
+    {
+        currentLevel = value;
     }
 }

@@ -10,8 +10,8 @@ public class PlushFactoryScript : BuildingBasicScript
 
     void Start()
     {
-        PlushFactoryScript plushyFactory = (PlushFactoryScript) PlayerStats.GetBuilding(1);
-        if (plushyFactory == null)
+        BuildingSaveScript savedFactory = PlayerStats.GetSavedBuilding(1);
+        if (savedFactory == null)
         {
             level = 0;
             maxLevel = 5;
@@ -24,12 +24,7 @@ public class PlushFactoryScript : BuildingBasicScript
             isActive = false;
         } else
         {
-            this.level = plushyFactory.level;
-            this.maxLevel = plushyFactory.maxLevel;
-            this.cost = plushyFactory.cost;
-            this.populationInput = plushyFactory.populationInput;
-            this.plushOutput = plushyFactory.plushOutput;
-            this.isActive = plushyFactory.isActive;
+            this.LoadFromSave(savedFactory);
         }
         PlayerStats.AddBuilding(this);
 
@@ -43,6 +38,10 @@ public class PlushFactoryScript : BuildingBasicScript
             UIScript.SetOutput1(plushOutput);
             UIScript.SetUpgradeCost(cost);
             UIScript.SetLevel(level, maxLevel);
+            if (!isActive)
+            {
+                this.DeactivateBuilding();
+            }
         }
 
         townLogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<TownLogicScript>();
@@ -151,5 +150,35 @@ public class PlushFactoryScript : BuildingBasicScript
         PlayerStats.ProducePlush(plushOutput);
 
         return population - populationInput;
+    }
+
+    public override BuildingSaveScript SaveBuilding()
+    {
+        BuildingSaveScript savedInfo = new BuildingSaveScript();
+        savedInfo.SaveBuilding(this);
+        return savedInfo;
+    }
+
+    public override void LoadFromSave(BuildingSaveScript building)
+    {
+        level = building.GetLevel();
+        maxLevel = 5;
+        cost = building.GetCost();
+        ID = 1;
+        populationInput = building.GetInput1();
+        plushOutput = building.GetOutput1();
+        fulfilment = building.GetFulfilment();
+        upgradeAmmount = building.GetUpgradeAmmount();
+        isActive = building.GetIsActive();
+    }
+
+    public int GetPopulationInput()
+    {
+        return populationInput;
+    }
+
+    public int GetPlushOutput()
+    {
+        return plushOutput;
     }
 }

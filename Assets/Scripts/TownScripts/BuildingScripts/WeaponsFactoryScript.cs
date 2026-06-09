@@ -14,8 +14,8 @@ public class WeaponsFactoryScript : BuildingBasicScript
 
     void Start()
     {
-        WeaponsFactoryScript weaponsFactory = (WeaponsFactoryScript)PlayerStats.GetBuilding(4);
-        if (weaponsFactory == null)
+        BuildingSaveScript savedFactory = PlayerStats.GetSavedBuilding(4);
+        if (savedFactory == null)
         {
             level = 0;
             maxLevel = 5;
@@ -33,14 +33,7 @@ public class WeaponsFactoryScript : BuildingBasicScript
         }
         else
         {
-            this.level = weaponsFactory.level;
-            this.maxLevel = weaponsFactory.maxLevel;
-            this.cost = weaponsFactory.cost;
-            this.plushyInput = weaponsFactory.plushyInput;
-            this.weaponsOutput = weaponsFactory.weaponsOutput;
-            this.damageBoostOutput = weaponsFactory.damageBoostOutput;
-            this.reloadBoostOutput = weaponsFactory.reloadBoostOutput;
-            this.isActive = weaponsFactory.isActive;
+            this.LoadFromSave(savedFactory);
         }
         PlayerStats.AddBuilding(this);
 
@@ -61,6 +54,10 @@ public class WeaponsFactoryScript : BuildingBasicScript
             
             UIScript.SetUpgradeCost(cost);
             UIScript.SetLevel(level, maxLevel);
+            if (!isActive)
+            {
+                this.DeactivateBuilding();
+            }
         }
 
         townLogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<TownLogicScript>();
@@ -224,5 +221,59 @@ public class WeaponsFactoryScript : BuildingBasicScript
         PlayerStats.ConsumePlush(plushyInput);
         PlayerStats.ConsumeLeather(leatherInput);
         return population - populationNeeded;
+    }
+
+    public override BuildingSaveScript SaveBuilding()
+    {
+        BuildingSaveScript savedInfo = new BuildingSaveScript();
+        savedInfo.SaveBuilding(this);
+        return savedInfo;
+    }
+
+    public override void LoadFromSave(BuildingSaveScript building)
+    {
+        level = building.GetLevel();
+        maxLevel = 5;
+        cost = building.GetCost();
+        ID = 4;
+        populationNeeded = building.GetInput1();
+        plushyInput = building.GetInput2();
+        leatherInput = building.GetInput3();
+        weaponsOutput = building.GetOutput1();
+        damageBoostOutput = building.GetOutput2();
+        reloadBoostOutput = building.GetOutput3();
+        fulfilment = building.GetFulfilment();
+        upgradeAmmount = building.GetUpgradeAmmount();
+        isActive = building.GetIsActive();
+    }
+
+    public int GetPopulationNeeded()
+    {
+        return populationNeeded;
+    }
+
+    public int GetPlushyInput()
+    {
+        return plushyInput;
+    }
+
+    public int GetLeatherInput()
+    {
+        return leatherInput;
+    }
+
+    public int GetWeaponsOutput()
+    {
+        return weaponsOutput;
+    }
+
+    public int GetDamageBoostOutput()
+    {
+        return damageBoostOutput;
+    }
+
+    public int GetReloadBoostOutput()
+    {
+        return reloadBoostOutput;
     }
 }

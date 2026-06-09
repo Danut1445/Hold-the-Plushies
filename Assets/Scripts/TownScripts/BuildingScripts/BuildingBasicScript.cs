@@ -21,9 +21,33 @@ public abstract class BuildingBasicScript : MonoBehaviour
 
     public abstract int PassDay(int population);
 
+    public abstract BuildingSaveScript SaveBuilding();
+
+    public abstract void LoadFromSave(BuildingSaveScript building);
+
     public int GetID()
     {
         return ID;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public int GetCost()
+    {
+        return cost;
+    }
+
+    public int GetFulfilment()
+    {
+        return fulfilment;
+    }
+
+    public int GetUpgradeAmmount()
+    {
+        return upgradeAmmount;
     }
 
     public bool GetIsActive()

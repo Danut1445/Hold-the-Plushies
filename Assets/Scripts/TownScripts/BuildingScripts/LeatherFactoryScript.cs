@@ -11,8 +11,8 @@ public class LeatherFactoryScript : BuildingBasicScript
 
     void Start()
     {
-        LeatherFactoryScript leatherFactory = (LeatherFactoryScript)PlayerStats.GetBuilding(2);
-        if (leatherFactory == null)
+        BuildingSaveScript savedFactory = PlayerStats.GetSavedBuilding(2);
+        if (savedFactory == null)
         {
             level = 0;
             maxLevel = 5;
@@ -27,13 +27,7 @@ public class LeatherFactoryScript : BuildingBasicScript
         }
         else
         {
-            this.level = leatherFactory.level;
-            this.maxLevel = leatherFactory.maxLevel;
-            this.cost = leatherFactory.cost;
-            this.populationInput = leatherFactory.populationInput;
-            this.plushyInput = leatherFactory.plushyInput;
-            this.leatherOutput = leatherFactory.leatherOutput;
-            this.isActive = leatherFactory.isActive;
+            this.LoadFromSave(savedFactory);
         }
         PlayerStats.AddBuilding(this);
 
@@ -48,6 +42,10 @@ public class LeatherFactoryScript : BuildingBasicScript
             UIScript.SetOutput1(leatherOutput);
             UIScript.SetUpgradeCost(cost);
             UIScript.SetLevel(level, maxLevel);
+            if (!isActive)
+            {
+                this.DeactivateBuilding();
+            }
         }
 
         townLogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<TownLogicScript>();
@@ -165,5 +163,41 @@ public class LeatherFactoryScript : BuildingBasicScript
         PlayerStats.ProduceLeather(leatherOutput);
 
         return population - populationInput;
+    }
+
+    public override BuildingSaveScript SaveBuilding()
+    {
+        BuildingSaveScript savedInfo = new BuildingSaveScript();
+        savedInfo.SaveBuilding(this);
+        return savedInfo;
+    }
+
+    public override void LoadFromSave(BuildingSaveScript building)
+    {
+        level = building.GetLevel();
+        maxLevel = 5;
+        cost = building.GetCost();
+        ID = 2;
+        populationInput = building.GetInput1();
+        plushyInput = building.GetInput2();
+        leatherOutput = building.GetOutput1();
+        fulfilment = building.GetFulfilment();
+        upgradeAmmount = building.GetUpgradeAmmount();
+        isActive = building.GetIsActive();
+    }
+
+    public int GetPopulationInput()
+    {
+        return populationInput;
+    }
+
+    public int GetPlushyInput()
+    {
+        return plushyInput;
+    }
+
+    public int GetLeatherOutput()
+    {
+        return leatherOutput;
     }
 }
