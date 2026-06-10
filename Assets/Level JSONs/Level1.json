@@ -3,13 +3,29 @@
         {
             "wave": [
                 {
-                    "count": 10,
+                    "count": 2,
                     "interval": 2.0,
                     "timer": 2.0,
                     "enemyID": 0
                 },
                 {
                     "count": 5,
+                    "interval": 3.0,
+                    "timer": 3.0,
+                    "enemyID": 0
+                }
+            ]
+        },
+        {
+            "wave": [
+                {
+                    "count": 4,
+                    "interval": 2.0,
+                    "timer": 2.0,
+                    "enemyID": 0
+                },
+                {
+                    "count": 2,
                     "interval": 3.0,
                     "timer": 3.0,
                     "enemyID": 0

@@ -23,6 +23,7 @@ public class PlushyScript : MonoBehaviour
         }
 
         levelLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>();
+        levelLogic.IncreaseNumberEnemies(1);
     }
 
     // Update is called once per frame
@@ -37,6 +38,7 @@ public class PlushyScript : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            levelLogic.DecreaseNumberEnemies(1);
             levelLogic.gainMoney(value);
         }
     }
@@ -44,6 +46,7 @@ public class PlushyScript : MonoBehaviour
     public int DoDamageToBase()
     {
         Destroy(gameObject);
+        levelLogic.DecreaseNumberEnemies(1);
         return baseDamage;
     }
 }

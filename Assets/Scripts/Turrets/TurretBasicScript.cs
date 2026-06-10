@@ -81,6 +81,7 @@ public class TurretBasicScript : UpgradableTurretScript
     {
         if (!activated)
         {
+            turretBody.rotation = 0;
             return;
         }
 
