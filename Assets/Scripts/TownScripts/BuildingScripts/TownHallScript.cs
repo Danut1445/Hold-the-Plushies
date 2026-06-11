@@ -1,30 +1,31 @@
 using UnityEngine;
 using System;
 
-public class PlushFactoryScript : BuildingBasicScript
+public class TownHallScript : BuildingBasicScript
 {
     private BuildingUIScript UIScript;
     private TownLogicScript townLogicScript;
-    private int populationInput;
-    private int plushOutput;
+    private int plushInput;
+    private int timer;
 
     void Start()
     {
-        BuildingSaveScript savedFactory = PlayerStats.GetSavedBuilding(1);
-        if (savedFactory == null)
+        BuildingSaveScript savedHall = PlayerStats.GetSavedBuilding(6);
+        if (savedHall == null)
         {
             level = 0;
-            maxLevel = 5;
-            cost = 100;
-            ID = 1;
-            populationInput = 10;
-            plushOutput = 100;
+            maxLevel = 1;
+            cost = 200;
+            ID = 6;
+            plushInput = 10;
+            timer = 0;
             fulfilment = 0;
-            upgradeAmmount = 35;
+            upgradeAmmount = 0;
             isActive = false;
-        } else
+        }
+        else
         {
-            this.LoadFromSave(savedFactory);
+            this.LoadFromSave(savedHall);
         }
         PlayerStats.AddBuilding(this);
 
@@ -34,8 +35,8 @@ public class PlushFactoryScript : BuildingBasicScript
         {
             UIScript.CreateBuilding();
             UIScript.SetFulfilment(fulfilment);
-            UIScript.SetInput1(populationInput);
-            UIScript.SetOutput1(plushOutput);
+            UIScript.SetInput1(plushInput);
+            UIScript.SetOutput1(timer);
             UIScript.SetUpgradeCost(cost);
             UIScript.SetLevel(level, maxLevel);
             if (!isActive)
@@ -61,9 +62,9 @@ public class PlushFactoryScript : BuildingBasicScript
             UIScript.SetLevel(level, maxLevel);
             fulfilment = 100;
             UIScript.SetFulfilment(fulfilment);
-            UIScript.SetInput1(populationInput);
-            UIScript.SetOutput1(plushOutput);
-            UIScript.SetUpgradeCost(cost);
+            UIScript.SetInput1(plushInput);
+            UIScript.SetOutput1(timer);
+            UIScript.SetUpgradeCost(0);
             isActive = true;
             UIScript.CreateBuilding();
             UIScript.SetImage(level);
@@ -85,8 +86,6 @@ public class PlushFactoryScript : BuildingBasicScript
             level++;
             UIScript.SetLevel(level, maxLevel);
             fulfilment = 100;
-            populationInput += populationInput * upgradeAmmount / 100;
-            plushOutput += plushOutput * upgradeAmmount / 100;
             cost = cost * 2;
 
             if (level >= maxLevel)
@@ -96,8 +95,6 @@ public class PlushFactoryScript : BuildingBasicScript
             }
 
             UIScript.SetFulfilment(fulfilment);
-            UIScript.SetInput1(populationInput);
-            UIScript.SetOutput1(plushOutput);
             UIScript.SetUpgradeCost(cost);
             UIScript.CreateBuilding();
             UIScript.SetImage(level);
@@ -126,30 +123,32 @@ public class PlushFactoryScript : BuildingBasicScript
 
     public override int PassDay(int population)
     {
-        if (!isActive) {
+        if (!isActive)
+        {
             return population;
         }
 
-        float fulfilmentFloat = CheckEnoughResources(population, populationInput, 100f);
+        float fulfilmentFloat = CheckEnoughResources(PlayerStats.GetPlush(), plushInput, 100f);
         if (fulfilmentFloat < 100f)
         {
-            fulfilment = (int) Math.Round(fulfilmentFloat);
-            UIScript.SetInput1((int) (fulfilmentFloat * populationInput / 100));
-            UIScript.SetOutput1((int) (plushOutput * fulfilmentFloat / 100));
+            fulfilment = (int)Math.Round(fulfilmentFloat);
+            UIScript.SetInput1((int)(fulfilmentFloat * plushInput / 100));
             UIScript.SetFulfilment(fulfilment);
-
-            PlayerStats.ProducePlush(plushOutput * fulfilment / 100);
-            return 0;
+        } else
+        {
+            fulfilment = 100;
+            UIScript.SetInput1(plushInput);
+            UIScript.SetFulfilment(fulfilment);
+            timer -= 1;
         }
 
-        fulfilment = 100;
-        UIScript.SetInput1(populationInput);
-        UIScript.SetOutput1(plushOutput);
-        UIScript.SetFulfilment(fulfilment);
+        if (timer < 0)
+        {
+            timer = 0;
+        }
+        UIScript.SetOutput1(timer);
 
-        PlayerStats.ProducePlush(plushOutput);
-
-        return population - populationInput;
+        return population;
     }
 
     public override BuildingSaveScript SaveBuilding()
@@ -162,23 +161,28 @@ public class PlushFactoryScript : BuildingBasicScript
     public override void LoadFromSave(BuildingSaveScript building)
     {
         level = building.GetLevel();
-        maxLevel = 5;
+        maxLevel = 1;
         cost = building.GetCost();
-        ID = 1;
-        populationInput = building.GetInput1();
-        plushOutput = building.GetOutput1();
+        ID = 6;
+        plushInput = building.GetInput1();
+        timer = building.GetOutput1();
         fulfilment = building.GetFulfilment();
         upgradeAmmount = building.GetUpgradeAmmount();
         isActive = building.GetIsActive();
     }
 
-    public int GetPopulationInput()
+    public int GetPlushInput()
     {
-        return populationInput;
+        return plushInput;
     }
 
-    public int GetPlushOutput()
+    public int GetTimer()
     {
-        return plushOutput;
+        return timer;
+    }
+
+    public void ResetTimer()
+    {
+        timer = 4;
     }
 }

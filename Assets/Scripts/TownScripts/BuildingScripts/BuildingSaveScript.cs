@@ -55,6 +55,24 @@ public class BuildingSaveScript
         output3 = building.GetReloadBoostOutput();
     }
 
+    public void SaveBuilding(BarracksScript building)
+    {
+        this.SaveBuilding((BuildingBasicScript)building);
+        input1 = building.GetPopulationInput();
+        input2 = building.GetPlushyInput();
+        input3 = building.GetLeatherInput();
+        output1 = building.GetGuardsOutput();
+        output2 = building.GetPopulationPowerOutput();
+        output3 = building.GetReputationOutput();
+    }
+
+    public void SaveBuilding(TownHallScript building)
+    {
+        this.SaveBuilding((BuildingBasicScript)building);
+        input1 = building.GetPlushInput();
+        output1 = building.GetTimer();
+    }
+
     public int GetID()
     {
         return ID;

@@ -58,7 +58,7 @@ public class BuildingUIScript : MonoBehaviour
 
     public void SetUpgradeButton(bool value)
     {
-       upgradeButton.SetActive(value);
+        upgradeButton.GetComponent<Button>().interactable = false;
     }
 
     public void SetStopButton(bool value)

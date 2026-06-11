@@ -55,4 +55,10 @@ public class TownLogicScript : MonoBehaviour
         plushText.SetText(PlayerStats.GetPlush().ToString());
         leatherText.SetText(PlayerStats.GetLeather().ToString());
     }
+
+    public void UpdateUIReputation()
+    {
+        reputation.value = PlayerStats.GetReputation();
+        populationPower.value = PlayerStats.GetPopulationPower();
+    }
 }

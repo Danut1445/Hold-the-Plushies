@@ -40,6 +40,7 @@ public class LevelLogicScript : MonoBehaviour
         existsWave = true;
         finnishedAllWaves = false;
         currentWave = 1;
+        currentHealth = PlayerStats.GetGuards();
         plushySpawner.GetComponent<PlushySpawnerScript>().StartSpwaningNextWave();
 
         maximumWaveText.SetText(plushySpawner.GetComponent<PlushySpawnerScript>().GetRemainingWaves().ToString());
@@ -94,17 +95,16 @@ public class LevelLogicScript : MonoBehaviour
         winScreen.SetActive(true);
         reputationGainedText.SetText("10");
         reputationGainedMoneyText.SetText(Mathf.Min(10, currentMoney / 20).ToString());
-        reputationLostText.SetText(((100 - currentHealth) / 10).ToString());
-        int totalreputaion = 10 + Mathf.Min(10, currentMoney / 20) - ((100 - currentHealth) / 10);
+        reputationLostText.SetText((PlayerStats.GetGuards() - currentHealth).ToString());
+        int totalreputaion = 10 + Mathf.Min(10, currentMoney / 20) - (PlayerStats.GetGuards() - currentHealth);
         reputationTotalText.SetText(totalreputaion.ToString());
     }
 
     public void takeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (currentHealth < 0)
         {
-            currentHealth = 0;
             GameOver();
         }
         healthText.SetText(currentHealth.ToString());

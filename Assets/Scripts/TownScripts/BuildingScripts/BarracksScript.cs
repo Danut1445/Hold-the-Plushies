@@ -1,39 +1,39 @@
 using UnityEngine;
 using System;
 
-public class WeaponsFactoryScript : BuildingBasicScript
+public class BarracksScript : BuildingBasicScript
 {
     private BuildingUIScript UIScript;
     private TownLogicScript townLogicScript;
+    private int populationInput;
     private int plushyInput;
-    private int populationNeeded;
     private int leatherInput;
-    private int weaponsOutput;
-    private int damageBoostOutput;
-    private int reloadBoostOutput;
+    private int guardsOutput;
+    private int populationPowerOutput;
+    private int reputationOutput;
 
     void Start()
     {
-        BuildingSaveScript savedFactory = PlayerStats.GetSavedBuilding(4);
-        if (savedFactory == null)
+        BuildingSaveScript savedBarracks = PlayerStats.GetSavedBuilding(5);
+        if (savedBarracks == null)
         {
             level = 0;
             maxLevel = 5;
-            cost = 200;
-            ID = 4;
-            plushyInput = 20;
-            populationNeeded = 10;
+            cost = 100;
+            ID = 5;
+            plushyInput = 5;
+            populationInput = 5;
             leatherInput = 5;
-            weaponsOutput = 2;
-            damageBoostOutput = 0;
-            reloadBoostOutput = 0;
+            guardsOutput = 5;
+            populationPowerOutput = -10;
+            reputationOutput = -10;
             fulfilment = 0;
-            upgradeAmmount = 10;
+            upgradeAmmount = 40;
             isActive = false;
         }
         else
         {
-            this.LoadFromSave(savedFactory);
+            this.LoadFromSave(savedBarracks);
         }
         PlayerStats.AddBuilding(this);
 
@@ -44,14 +44,14 @@ public class WeaponsFactoryScript : BuildingBasicScript
             UIScript.CreateBuilding();
             UIScript.SetFulfilment(fulfilment);
 
-            UIScript.SetInput1(populationNeeded);
+            UIScript.SetInput1(populationInput);
             UIScript.SetInput2(plushyInput);
             UIScript.SetInput3(leatherInput);
 
-            UIScript.SetOutput1(weaponsOutput);
-            UIScript.SetOutput2(damageBoostOutput);
-            UIScript.SetOutput3(reloadBoostOutput);
-            
+            UIScript.SetOutput1(guardsOutput);
+            UIScript.SetOutput2(populationPowerOutput);
+            UIScript.SetOutput3(reputationOutput);
+
             UIScript.SetUpgradeCost(cost);
             UIScript.SetLevel(level, maxLevel);
             if (!isActive)
@@ -61,6 +61,7 @@ public class WeaponsFactoryScript : BuildingBasicScript
         }
 
         townLogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<TownLogicScript>();
+        townLogicScript.UpdateUIReputation();
     }
 
     public override void CreateBuilding()
@@ -72,19 +73,21 @@ public class WeaponsFactoryScript : BuildingBasicScript
         {
             PlayerStats.ConsumeLeather(leatherNeeded);
             PlayerStats.ConsumePlush(plushNeeded);
+            PlayerStats.ChangeReputation(reputationOutput);
+            PlayerStats.ChangePopulationPower(populationPowerOutput);
 
             level = 1;
             UIScript.SetLevel(level, maxLevel);
             fulfilment = 100;
             UIScript.SetFulfilment(fulfilment);
 
-            UIScript.SetInput1(populationNeeded);
+            UIScript.SetInput1(populationInput);
             UIScript.SetInput2(plushyInput);
             UIScript.SetInput3(leatherInput);
 
-            UIScript.SetOutput1(weaponsOutput);
-            UIScript.SetOutput2(damageBoostOutput);
-            UIScript.SetOutput3(reloadBoostOutput);
+            UIScript.SetOutput1(guardsOutput);
+            UIScript.SetOutput2(populationPowerOutput);
+            UIScript.SetOutput3(reputationOutput);
 
             UIScript.SetUpgradeCost(cost);
             isActive = true;
@@ -93,6 +96,7 @@ public class WeaponsFactoryScript : BuildingBasicScript
 
             townLogicScript.UpdateUIResources();
         }
+        townLogicScript.UpdateUIReputation();
     }
 
     public override void UpgradeBuilding()
@@ -109,19 +113,16 @@ public class WeaponsFactoryScript : BuildingBasicScript
             UIScript.SetLevel(level, maxLevel);
             fulfilment = 100;
 
-            plushyInput += plushyInput / 2;
-            populationNeeded += populationNeeded / 2;
-            leatherInput += leatherInput / 2;
-
-            if (level % 2 == 0)
-            {
-                damageBoostOutput += upgradeAmmount;
-            } else
-            {
-                reloadBoostOutput += upgradeAmmount;
+            plushyInput += plushyInput * upgradeAmmount / 100;
+            populationInput += populationInput * upgradeAmmount / 100;
+            leatherInput += leatherInput * upgradeAmmount / 100;
+            guardsOutput += guardsOutput * upgradeAmmount / 100;
+            if (isActive) {
+                PlayerStats.ChangeReputation(reputationOutput * upgradeAmmount / 100);
+                PlayerStats.ChangePopulationPower(populationPowerOutput * upgradeAmmount / 100);
             }
-            weaponsOutput++;
-
+            reputationOutput += reputationOutput * upgradeAmmount / 100;
+            populationPowerOutput += populationPowerOutput * upgradeAmmount / 100;
             cost = cost * 2;
 
             if (level >= maxLevel)
@@ -132,13 +133,13 @@ public class WeaponsFactoryScript : BuildingBasicScript
 
             UIScript.SetFulfilment(fulfilment);
 
-            UIScript.SetInput1(populationNeeded);
+            UIScript.SetInput1(populationInput);
             UIScript.SetInput2(plushyInput);
             UIScript.SetInput3(leatherInput);
 
-            UIScript.SetOutput1(weaponsOutput);
-            UIScript.SetOutput2(damageBoostOutput);
-            UIScript.SetOutput3(reloadBoostOutput);
+            UIScript.SetOutput1(guardsOutput);
+            UIScript.SetOutput2(populationPowerOutput);
+            UIScript.SetOutput3(reputationOutput);
 
             UIScript.SetUpgradeCost(cost);
             UIScript.CreateBuilding();
@@ -146,6 +147,8 @@ public class WeaponsFactoryScript : BuildingBasicScript
 
             townLogicScript.UpdateUIResources();
         }
+
+        townLogicScript.UpdateUIReputation();
     }
 
     public override void DeactivateBuilding()
@@ -155,6 +158,9 @@ public class WeaponsFactoryScript : BuildingBasicScript
         isActive = false;
         UIScript.SetStopButton(false);
         UIScript.SetRestartButton(true);
+        PlayerStats.ChangeReputation(-reputationOutput);
+        PlayerStats.ChangePopulationPower(-populationPowerOutput);
+        townLogicScript.UpdateUIReputation();
     }
 
     public override void ReactivateBuilding()
@@ -164,64 +170,52 @@ public class WeaponsFactoryScript : BuildingBasicScript
         isActive = true;
         UIScript.SetStopButton(true);
         UIScript.SetRestartButton(false);
+        PlayerStats.ChangeReputation(reputationOutput);
+        PlayerStats.ChangePopulationPower(populationPowerOutput);
+        townLogicScript.UpdateUIReputation();
     }
 
     public override int PassDay(int population)
     {
-        Debug.Log(isActive);
         if (!isActive)
         {
-            PlayerStats.SetNumberWeapons(0);
-            PlayerStats.SetDamageBoost(0);
-            PlayerStats.SetReloadBoost(0);
+            PlayerStats.SetGuards(0);
             return population;
         }
 
-        float fulfilmentFloat = CheckEnoughResources(population, populationNeeded, 100f);
+        float fulfilmentFloat = CheckEnoughResources(population, populationInput, 100f);
         fulfilmentFloat = CheckEnoughResources(PlayerStats.GetPlush(), plushyInput, fulfilmentFloat);
         fulfilmentFloat = CheckEnoughResources(PlayerStats.GetLeather(), leatherInput, fulfilmentFloat);
 
         if (fulfilmentFloat < 100f)
         {
             fulfilment = (int)Math.Round(fulfilmentFloat);
-            UIScript.SetInput1((int)(fulfilmentFloat * populationNeeded / 100));
+            UIScript.SetInput1((int)(fulfilmentFloat * populationInput / 100));
             UIScript.SetInput2((int)(fulfilmentFloat * plushyInput / 100));
             UIScript.SetInput3((int)(fulfilmentFloat * leatherInput / 100));
 
-            int realWeaponsOutput = (int)(fulfilmentFloat * weaponsOutput / 100);
-            UIScript.SetOutput1(realWeaponsOutput);
-            PlayerStats.SetNumberWeapons(realWeaponsOutput);
-            
-            int realDamageOutput = (int)(fulfilmentFloat * damageBoostOutput / 100);
-            UIScript.SetOutput2(realDamageOutput);
-            PlayerStats.SetDamageBoost(realDamageOutput);
-
-            int realReloadOutput = (int)(fulfilmentFloat * reloadBoostOutput / 100);
-            UIScript.SetOutput3(realReloadOutput);
-            PlayerStats.SetReloadBoost(realReloadOutput);
+            int realGuards = (int)(fulfilmentFloat * guardsOutput / 100);
+            UIScript.SetOutput1(realGuards);
+            PlayerStats.SetGuards(realGuards);
 
             UIScript.SetFulfilment(fulfilment);
 
             PlayerStats.ConsumePlush((int)(fulfilmentFloat * plushyInput / 100));
             PlayerStats.ConsumeLeather((int)(fulfilmentFloat * leatherInput / 100));
-            return Math.Max(population - ((int)(fulfilmentFloat * populationNeeded / 100)), 0);
+            return Math.Max(population - ((int)(fulfilmentFloat * populationInput / 100)), 0);
         }
 
         fulfilment = 100;
-        UIScript.SetInput1(populationNeeded);
+        UIScript.SetInput1(populationInput);
         UIScript.SetInput2(plushyInput);
         UIScript.SetInput3(leatherInput);
 
-        UIScript.SetOutput1(weaponsOutput);
-        PlayerStats.SetNumberWeapons(weaponsOutput);
-        UIScript.SetOutput2(damageBoostOutput);
-        PlayerStats.SetDamageBoost(damageBoostOutput);
-        UIScript.SetOutput3(reloadBoostOutput);
-        PlayerStats.SetReloadBoost(reloadBoostOutput);
+        UIScript.SetOutput1(guardsOutput);
+        PlayerStats.SetGuards(guardsOutput);
 
         PlayerStats.ConsumePlush(plushyInput);
         PlayerStats.ConsumeLeather(leatherInput);
-        return population - populationNeeded;
+        return population - populationInput;
     }
 
     public override BuildingSaveScript SaveBuilding()
@@ -236,21 +230,21 @@ public class WeaponsFactoryScript : BuildingBasicScript
         level = building.GetLevel();
         maxLevel = 5;
         cost = building.GetCost();
-        ID = 4;
-        populationNeeded = building.GetInput1();
+        ID = 5;
+        populationInput = building.GetInput1();
         plushyInput = building.GetInput2();
         leatherInput = building.GetInput3();
-        weaponsOutput = building.GetOutput1();
-        damageBoostOutput = building.GetOutput2();
-        reloadBoostOutput = building.GetOutput3();
+        guardsOutput = building.GetOutput1();
+        populationPowerOutput = building.GetOutput2();
+        reputationOutput = building.GetOutput3();
         fulfilment = building.GetFulfilment();
         upgradeAmmount = building.GetUpgradeAmmount();
         isActive = building.GetIsActive();
     }
 
-    public int GetPopulationNeeded()
+    public int GetPopulationInput()
     {
-        return populationNeeded;
+        return populationInput;
     }
 
     public int GetPlushyInput()
@@ -263,18 +257,18 @@ public class WeaponsFactoryScript : BuildingBasicScript
         return leatherInput;
     }
 
-    public int GetWeaponsOutput()
+    public int GetGuardsOutput()
     {
-        return weaponsOutput;
+        return guardsOutput;
     }
 
-    public int GetDamageBoostOutput()
+    public int GetPopulationPowerOutput()
     {
-        return damageBoostOutput;
+        return populationPowerOutput;
     }
 
-    public int GetReloadBoostOutput()
+    public int GetReputationOutput()
     {
-        return reloadBoostOutput;
+        return reputationOutput;
     }
 }

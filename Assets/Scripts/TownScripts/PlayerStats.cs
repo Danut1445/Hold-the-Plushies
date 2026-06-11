@@ -11,6 +11,7 @@ public static class PlayerStats
     private static int plush;
     private static int population;
     private static int weapons;
+    private static int guards;
     private static int damageBoost;
     private static int reloadBoost;
     private static int currentDay;
@@ -25,8 +26,8 @@ public static class PlayerStats
         buildingSaves = new BuildingSaveScript[10];
         reputation = 0;
         populatioPower = 50;
-        leather = 100;
-        plush = 100;
+        leather = 1000;
+        plush = 1000;
         weapons = 0;
         damageBoost = 0;
         reloadBoost = 0;
@@ -153,6 +154,16 @@ public static class PlayerStats
     public static void SetNumberWeapons(int value)
     {
         weapons = value;
+    }
+
+    public static int GetGuards()
+    {
+        return guards;
+    }
+
+    public static void SetGuards(int value)
+    {
+        guards = value;
     }
 
     public static int GetDamageBoost()
