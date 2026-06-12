@@ -10,6 +10,7 @@ TagManager:
   - Turret
   - Leader
   - UILogic
+  - Policy
   layers:
   - Default
   - TransparentFX

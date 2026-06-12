@@ -17,15 +17,19 @@ public static class PlayerStats
     private static int currentDay;
     private static int nextAttackDay;
     private static int currentLevel = 0;
+    private static int policyTimer;
     private static BuildingBasicScript[] buildings;
     private static BuildingSaveScript[] buildingSaves;
+    private static PolicySaveScript[] policySaves;
 
     public static void NewGame()
     {
         buildings = new BuildingBasicScript[10];
         buildingSaves = new BuildingSaveScript[10];
+        policySaves = new PolicySaveScript[100];
         reputation = 0;
         populatioPower = 50;
+        policyTimer = 0;
         leather = 1000;
         plush = 1000;
         weapons = 0;
@@ -72,6 +76,18 @@ public static class PlayerStats
             }
         }
     }
+
+    public static void SavePolicy(PolicyBasicScript policy)
+    {
+        PolicySaveScript policySave = new PolicySaveScript();
+        policySave.SavePolicy(policy);
+        policySaves[policySave.GetID()] = policySave;
+    }
+
+    public static PolicySaveScript GetPolicy(int ID)
+    {
+        return policySaves[ID];
+    } 
 
     public static BuildingSaveScript GetSavedBuilding(int ID)
     {
@@ -229,5 +245,21 @@ public static class PlayerStats
     public static void ChangeCurrentLevel(int value)
     {
         currentLevel = value;
+    }
+
+    public static int GetPolicyTimer()
+    {
+        return policyTimer;
+    }
+
+    public static void SetPolicyTimer(int value)
+    {
+        policyTimer = value;
+    }
+
+    public static void ResetPolicyTimer()
+    {
+        policyTimer = 4;
+        buildingSaves[6].SetOutput1(4);
     }
 }

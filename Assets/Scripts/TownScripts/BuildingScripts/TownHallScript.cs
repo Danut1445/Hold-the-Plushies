@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class TownHallScript : BuildingBasicScript
 {
@@ -147,6 +148,7 @@ public class TownHallScript : BuildingBasicScript
             timer = 0;
         }
         UIScript.SetOutput1(timer);
+        PlayerStats.SetPolicyTimer(timer);
 
         return population;
     }
@@ -171,6 +173,11 @@ public class TownHallScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public void GoToPolicies()
+    {
+        PlayerStats.SaveAllBuildings();
+        SceneManager.LoadScene("PolicyTree");
+    }
     public int GetPlushInput()
     {
         return plushInput;
@@ -184,5 +191,6 @@ public class TownHallScript : BuildingBasicScript
     public void ResetTimer()
     {
         timer = 4;
+        UIScript.SetOutput1(timer);
     }
 }

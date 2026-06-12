@@ -98,6 +98,7 @@ public class LevelLogicScript : MonoBehaviour
         reputationLostText.SetText((PlayerStats.GetGuards() - currentHealth).ToString());
         int totalreputaion = 10 + Mathf.Min(10, currentMoney / 20) - (PlayerStats.GetGuards() - currentHealth);
         reputationTotalText.SetText(totalreputaion.ToString());
+        PlayerStats.ChangeReputation(totalreputaion);
     }
 
     public void takeDamage(int damage)

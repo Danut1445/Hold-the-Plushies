@@ -108,9 +108,19 @@ public class BuildingSaveScript
         return input1;
     }
 
+    public void SetInput1(int value)
+    {
+        input1 = value;
+    }
+
     public int GetInput2()
     {
         return input2;
+    }
+
+    public void SetInput2(int value)
+    {
+        input2 = value;
     }
 
     public int GetInput3()
@@ -118,9 +128,19 @@ public class BuildingSaveScript
         return input3;
     }
 
+    public void SetInput3(int value)
+    {
+        input3 = value;
+    }
+
     public int GetInput4()
     {
         return input4;
+    }
+
+    public void SetInput4(int value)
+    {
+        input4 = value;
     }
 
     public int GetOutput1()
@@ -128,9 +148,19 @@ public class BuildingSaveScript
         return output1;
     }
 
+    public void SetOutput1(int value)
+    {
+        output1 = value;
+    }
+
     public int GetOutput2()
     {
         return output2;
+    }
+
+    public void SetOutput2(int value)
+    {
+        output2 = value;
     }
 
     public int GetOutput3()
@@ -138,8 +168,18 @@ public class BuildingSaveScript
         return output3;
     }
 
+    public void SetOutput3(int value)
+    {
+        output3 = value;
+    }
+
     public int GetOutput4()
     {
         return output4;
+    }
+
+    public void SetOutput4(int value)
+    {
+        output4 = value;
     }
 }

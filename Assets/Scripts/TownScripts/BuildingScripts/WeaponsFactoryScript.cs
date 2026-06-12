@@ -168,7 +168,6 @@ public class WeaponsFactoryScript : BuildingBasicScript
 
     public override int PassDay(int population)
     {
-        Debug.Log(isActive);
         if (!isActive)
         {
             PlayerStats.SetNumberWeapons(0);
