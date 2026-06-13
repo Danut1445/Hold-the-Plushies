@@ -242,6 +242,19 @@ public class BarracksScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public override void ResetBuilding()
+    {
+        BuildingSaveScript savedBuilding = PlayerStats.GetSavedBuilding(ID);
+        LoadFromSave(savedBuilding);
+        UIScript.SetInput1(populationInput);
+        UIScript.SetInput2(plushyInput);
+        UIScript.SetInput3(leatherInput);
+
+        UIScript.SetOutput1(guardsOutput);
+        UIScript.SetOutput2(populationPowerOutput);
+        UIScript.SetOutput3(reputationOutput);
+    }
+
     public int GetPopulationInput()
     {
         return populationInput;

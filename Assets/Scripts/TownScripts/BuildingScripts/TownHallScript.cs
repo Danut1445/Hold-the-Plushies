@@ -173,6 +173,14 @@ public class TownHallScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public override void ResetBuilding()
+    {
+        BuildingSaveScript savedBuilding = PlayerStats.GetSavedBuilding(ID);
+        LoadFromSave(savedBuilding);
+        UIScript.SetInput1(plushInput);
+        UIScript.SetOutput1(timer);
+    }
+
     public void GoToPolicies()
     {
         PlayerStats.SaveAllBuildings();

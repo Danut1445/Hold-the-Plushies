@@ -247,6 +247,19 @@ public class WeaponsFactoryScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public override void ResetBuilding()
+    {
+        BuildingSaveScript savedBuilding = PlayerStats.GetSavedBuilding(ID);
+        LoadFromSave(savedBuilding);
+        UIScript.SetInput1(populationNeeded);
+        UIScript.SetInput2(plushyInput);
+        UIScript.SetInput3(leatherInput);
+
+        UIScript.SetOutput1(weaponsOutput);
+        UIScript.SetOutput2(damageBoostOutput);
+        UIScript.SetOutput3(reloadBoostOutput);
+    }
+
     public int GetPopulationNeeded()
     {
         return populationNeeded;

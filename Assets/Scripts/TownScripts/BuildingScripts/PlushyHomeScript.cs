@@ -181,6 +181,14 @@ public class PlushyHomeScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public override void ResetBuilding()
+    {
+        BuildingSaveScript savedBuilding = PlayerStats.GetSavedBuilding(ID);
+        LoadFromSave(savedBuilding);
+        UIScript.SetInput1(plushyInput);
+        UIScript.SetOutput1(housingOutput);
+    }
+
     public int GetPlushyInput()
     {
         return plushyInput;

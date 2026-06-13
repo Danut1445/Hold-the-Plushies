@@ -186,6 +186,15 @@ public class LeatherFactoryScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public override void ResetBuilding()
+    {
+        BuildingSaveScript savedBuilding = PlayerStats.GetSavedBuilding(ID);
+        LoadFromSave(savedBuilding);
+        UIScript.SetInput1(populationInput);
+        UIScript.SetInput2(plushyInput);
+        UIScript.SetOutput1(leatherOutput);
+    }
+
     public int GetPopulationInput()
     {
         return populationInput;

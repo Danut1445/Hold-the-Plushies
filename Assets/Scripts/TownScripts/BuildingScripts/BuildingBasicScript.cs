@@ -19,6 +19,8 @@ public abstract class BuildingBasicScript : MonoBehaviour
 
     public abstract void ReactivateBuilding();
 
+    public abstract void ResetBuilding();
+
     public abstract int PassDay(int population);
 
     public abstract BuildingSaveScript SaveBuilding();

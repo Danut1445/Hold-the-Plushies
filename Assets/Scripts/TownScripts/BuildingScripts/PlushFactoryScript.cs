@@ -172,6 +172,14 @@ public class PlushFactoryScript : BuildingBasicScript
         isActive = building.GetIsActive();
     }
 
+    public override void ResetBuilding()
+    {
+        BuildingSaveScript savedBuilding = PlayerStats.GetSavedBuilding(ID);
+        LoadFromSave(savedBuilding);
+        UIScript.SetInput1(populationInput);
+        UIScript.SetOutput1(plushOutput);
+    }
+
     public int GetPopulationInput()
     {
         return populationInput;

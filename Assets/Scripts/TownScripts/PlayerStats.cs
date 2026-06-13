@@ -18,15 +18,20 @@ public static class PlayerStats
     private static int nextAttackDay;
     private static int currentLevel = 0;
     private static int policyTimer;
+    private const int sizeBuildings = 10;
     private static BuildingBasicScript[] buildings;
     private static BuildingSaveScript[] buildingSaves;
+    private const int sizePolicies = 100;
     private static PolicySaveScript[] policySaves;
+    private const int sizeEvents = 10;
+    private static BasicEventScript[] events;
 
     public static void NewGame()
     {
-        buildings = new BuildingBasicScript[10];
-        buildingSaves = new BuildingSaveScript[10];
-        policySaves = new PolicySaveScript[100];
+        buildings = new BuildingBasicScript[sizeBuildings];
+        buildingSaves = new BuildingSaveScript[sizeBuildings];
+        policySaves = new PolicySaveScript[sizePolicies];
+        events = new BasicEventScript[sizeEvents];
         reputation = 0;
         populatioPower = 50;
         policyTimer = 0;
@@ -56,17 +61,18 @@ public static class PlayerStats
         currentLevel = savedGame.currentLevel;
         population = savedGame.population;
 
-        buildings = new BuildingBasicScript[10];
+        buildings = new BuildingBasicScript[sizeBuildings];
+        events = new BasicEventScript[sizeEvents];
 
-        buildingSaves = new BuildingSaveScript[10];
-        for (int i = 0; i < 10; i++)
+        buildingSaves = new BuildingSaveScript[sizeBuildings];
+        for (int i = 0; i < sizeBuildings; i++)
         {
             if (savedGame.buildingSaves[i] != null)
                 buildingSaves[i] = new BuildingSaveScript(savedGame.buildingSaves[i]);
         }
 
-        policySaves = new PolicySaveScript[100];
-        for (int i = 0; i < 100; i++)
+        policySaves = new PolicySaveScript[sizePolicies];
+        for (int i = 0; i < sizePolicies; i++)
         {
             if (savedGame.policySaves[i] != null)
                 policySaves[i] = new PolicySaveScript(savedGame.policySaves[i]);
@@ -90,13 +96,13 @@ public static class PlayerStats
         savedGame.currentLevel = currentLevel;
         savedGame.population = population;
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < sizeBuildings; i++)
         {
             if (buildingSaves[i] != null)
                 savedGame.buildingSaves[i] = new BuildingSaveGame(buildingSaves[i]);
         }
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < sizePolicies; i++)
         {
             if (policySaves[i] != null)
                 savedGame.policySaves[i] = new PolicySaveGame(policySaves[i]);
@@ -117,6 +123,21 @@ public static class PlayerStats
                 continue;
             }
             remainingPopulation = building.PassDay(remainingPopulation);
+        }
+
+        SaveAllBuildings();
+        
+        foreach (BasicEventScript currentEvent in events)
+        {
+            if (currentEvent == null)
+            {
+                continue;
+            }
+            if (currentEvent.CheckConditions() && currentEvent.CheckChance())
+            {
+                currentEvent.SetActive();
+                break;
+            }
         }
     }
 
@@ -156,6 +177,10 @@ public static class PlayerStats
     public static BuildingSaveScript GetSavedBuilding(int ID)
     {
         return buildingSaves[ID];
+    }
+
+    public static void AddEvent(BasicEventScript currentEvent) {
+        events[currentEvent.GetID()] = currentEvent;
     }
 
     public static float GetReputation()
