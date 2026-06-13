@@ -12,6 +12,28 @@ public class BuildingSaveScript
     private int input1, input2, input3, input4;
     private int output1, output2, output3, output4;
 
+    public BuildingSaveScript()
+    {
+    }
+
+    public BuildingSaveScript(BuildingSaveGame buildingSave)
+    {
+        ID = buildingSave.ID;
+        level = buildingSave.level;
+        cost = buildingSave.cost;
+        fulfilment = buildingSave.fulfilment;
+        upgradeAmmount = buildingSave.upgradeAmmount;
+        isActive = buildingSave.isActive;
+        input1 = buildingSave.input1;
+        input2 = buildingSave.input2;
+        input3 = buildingSave.input3;
+        input4 = buildingSave.input4;
+        output1 = buildingSave.output1;
+        output2 = buildingSave.output2;
+        output3 = buildingSave.output3;
+        output4 = buildingSave.output4;
+    }
+
     public void SaveBuilding(BuildingBasicScript building)
     {
         ID = building.GetID();

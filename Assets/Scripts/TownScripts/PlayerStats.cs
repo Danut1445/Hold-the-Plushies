@@ -41,6 +41,70 @@ public static class PlayerStats
         population = 50;
     }
 
+    public static void LoadGame(SaveGameScript savedGame)
+    {
+        reputation = savedGame.reputation;
+        populatioPower = savedGame.populatioPower;
+        policyTimer = savedGame.policyTimer;
+        leather = savedGame.leather;
+        plush = savedGame.plush;
+        weapons = savedGame.weapons;
+        damageBoost = savedGame.damageBoost;
+        reloadBoost = savedGame.reloadBoost;
+        currentDay = savedGame.currentDay;
+        nextAttackDay = savedGame.nextAttackDay;
+        currentLevel = savedGame.currentLevel;
+        population = savedGame.population;
+
+        buildings = new BuildingBasicScript[10];
+
+        buildingSaves = new BuildingSaveScript[10];
+        for (int i = 0; i < 10; i++)
+        {
+            if (savedGame.buildingSaves[i] != null)
+                buildingSaves[i] = new BuildingSaveScript(savedGame.buildingSaves[i]);
+        }
+
+        policySaves = new PolicySaveScript[100];
+        for (int i = 0; i < 100; i++)
+        {
+            if (savedGame.policySaves[i] != null)
+                policySaves[i] = new PolicySaveScript(savedGame.policySaves[i]);
+        }
+    }
+
+    public static SaveGameScript SaveGame()
+    {
+        SaveGameScript savedGame = new SaveGameScript();
+
+        savedGame.reputation = reputation;
+        savedGame.populatioPower = populatioPower;
+        savedGame.policyTimer = policyTimer;
+        savedGame.leather = leather;
+        savedGame.plush = plush;
+        savedGame.weapons = weapons;
+        savedGame.damageBoost = damageBoost;
+        savedGame.reloadBoost = reloadBoost;
+        savedGame.currentDay = currentDay;
+        savedGame.nextAttackDay = nextAttackDay;
+        savedGame.currentLevel = currentLevel;
+        savedGame.population = population;
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (buildingSaves[i] != null)
+                savedGame.buildingSaves[i] = new BuildingSaveGame(buildingSaves[i]);
+        }
+
+        for (int i = 0; i < 100; i++)
+        {
+            if (policySaves[i] != null)
+                savedGame.policySaves[i] = new PolicySaveGame(policySaves[i]);
+        }
+
+        return savedGame;
+    }
+
     public static void PassDay()
     {
         currentDay++;

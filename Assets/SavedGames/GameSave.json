@@ -1,0 +1,579 @@
+{
+    "reputation": -10.0,
+    "populatioPower": 50.0,
+    "leather": 924,
+    "plush": 752,
+    "population": 50,
+    "weapons": 0,
+    "guards": 0,
+    "damageBoost": 0,
+    "reloadBoost": 0,
+    "currentDay": 3,
+    "nextAttackDay": 5,
+    "currentLevel": 1,
+    "policyTimer": 2,
+    "buildingSaves": [
+        {
+            "ID": 0,
+            "level": 0,
+            "cost": 0,
+            "fulfilment": 0,
+            "upgradeAmmount": 0,
+            "isActive": false,
+            "input1": 0,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 0,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 1,
+            "level": 1,
+            "cost": 100,
+            "fulfilment": 100,
+            "upgradeAmmount": 35,
+            "isActive": true,
+            "input1": 10,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 120,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 2,
+            "level": 1,
+            "cost": 150,
+            "fulfilment": 100,
+            "upgradeAmmount": 25,
+            "isActive": true,
+            "input1": 20,
+            "input2": 24,
+            "input3": 0,
+            "input4": 0,
+            "output1": 12,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 3,
+            "level": 1,
+            "cost": 50,
+            "fulfilment": 100,
+            "upgradeAmmount": 50,
+            "isActive": true,
+            "input1": 20,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 50,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 4,
+            "level": 0,
+            "cost": 200,
+            "fulfilment": 0,
+            "upgradeAmmount": 10,
+            "isActive": false,
+            "input1": 10,
+            "input2": 20,
+            "input3": 5,
+            "input4": 0,
+            "output1": 2,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 5,
+            "level": 0,
+            "cost": 100,
+            "fulfilment": 0,
+            "upgradeAmmount": 40,
+            "isActive": false,
+            "input1": 5,
+            "input2": 5,
+            "input3": 5,
+            "input4": 0,
+            "output1": 5,
+            "output2": -10,
+            "output3": -10,
+            "output4": 0
+        },
+        {
+            "ID": 6,
+            "level": 1,
+            "cost": 200,
+            "fulfilment": 100,
+            "upgradeAmmount": 0,
+            "isActive": true,
+            "input1": 10,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 4,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 0,
+            "level": 0,
+            "cost": 0,
+            "fulfilment": 0,
+            "upgradeAmmount": 0,
+            "isActive": false,
+            "input1": 0,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 0,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 0,
+            "level": 0,
+            "cost": 0,
+            "fulfilment": 0,
+            "upgradeAmmount": 0,
+            "isActive": false,
+            "input1": 0,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 0,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        },
+        {
+            "ID": 0,
+            "level": 0,
+            "cost": 0,
+            "fulfilment": 0,
+            "upgradeAmmount": 0,
+            "isActive": false,
+            "input1": 0,
+            "input2": 0,
+            "input3": 0,
+            "input4": 0,
+            "output1": 0,
+            "output2": 0,
+            "output3": 0,
+            "output4": 0
+        }
+    ],
+    "policySaves": [
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 1,
+            "ID": 1
+        },
+        {
+            "choiceMade": 0,
+            "ID": 2
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        },
+        {
+            "choiceMade": 0,
+            "ID": 0
+        }
+    ]
+}

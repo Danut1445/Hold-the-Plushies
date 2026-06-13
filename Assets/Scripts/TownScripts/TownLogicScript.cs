@@ -12,14 +12,14 @@ public class TownLogicScript : MonoBehaviour
     public Slider populationPower;
     public Slider reputation;
 
+    public GameObject townUI;
+    public GameObject pauseScreen;
+    private bool gamePause;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (PlayerStats.GetCurrentLevel() == 0)
-        {
-            PlayerStats.NewGame();
-        }
-
+        gamePause = false;
         plushText.SetText(PlayerStats.GetPlush().ToString());
         leatherText.SetText(PlayerStats.GetLeather().ToString());
         populationText.SetText(PlayerStats.GetPopulation().ToString());
@@ -27,6 +27,20 @@ public class TownLogicScript : MonoBehaviour
         nextAttackText.SetText(PlayerStats.GetNextAttackDay().ToString());
         reputation.value = PlayerStats.GetReputation();
         populationPower.value = PlayerStats.GetPopulationPower();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gamePause)
+            {
+                UnpauseGame();
+            } else
+            {
+                PauseGame();
+            }
+        }
     }
 
     public void PassDay()
@@ -60,5 +74,31 @@ public class TownLogicScript : MonoBehaviour
     {
         reputation.value = PlayerStats.GetReputation();
         populationPower.value = PlayerStats.GetPopulationPower();
+    }
+
+    public void PauseGame()
+    {
+        pauseScreen.SetActive(true);
+        townUI.SetActive(false);
+        gamePause = true;
+    }
+
+    public void UnpauseGame()
+    {
+        pauseScreen.SetActive(false);
+        townUI.SetActive(true);
+        gamePause = false;
+    }
+
+    public void SaveGame()
+    {
+        SaveGameScript savedGame = PlayerStats.SaveGame();
+        PlayerPrefs.SetInt("HasSavefile", 1);
+        SaveSystem.SaveGame(savedGame);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
