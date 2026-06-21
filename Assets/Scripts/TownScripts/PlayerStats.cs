@@ -323,7 +323,7 @@ public static class PlayerStats
     public static void SetNextAttackDay(int value)
     {
         nextAttackDay = value;
-        //currentLevel++;
+        currentLevel++;
     }
 
     public static int GetCurrentLevel()

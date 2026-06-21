@@ -7,6 +7,7 @@ public class PlushySpawnerScript : MonoBehaviour
 {
     public float timeBetweenWaves;
     public GameObject plushy;
+    public string levelFile;
 
     private List<WaveClass> waves;
     private WaveClass currentWave;
@@ -17,7 +18,8 @@ public class PlushySpawnerScript : MonoBehaviour
     void Start()
     {
         timeBetweenWaves = 5;
-        string json = WaveManager.LoadJSONFromFile(".\\Assets\\Level JSONs\\Level1.json");
+        string path = System.IO.Path.Combine(Application.streamingAssetsPath, levelFile);
+        string json = WaveManager.LoadJSONFromFile(path);
         Debug.Log(json);
         EnemyComposition enemyComposition = JsonUtility.FromJson<EnemyComposition>(json);
         enemyComposition.getPlushyAssets();

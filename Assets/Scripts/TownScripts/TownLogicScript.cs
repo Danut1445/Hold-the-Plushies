@@ -95,6 +95,7 @@ public class TownLogicScript : MonoBehaviour
         SaveGameScript savedGame = PlayerStats.SaveGame();
         PlayerPrefs.SetInt("HasSavefile", 1);
         SaveSystem.SaveGame(savedGame);
+        PlayerPrefs.Save();
     }
 
     public void GoToMainMenu()

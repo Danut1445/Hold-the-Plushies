@@ -71,7 +71,6 @@ public class LevelLogicScript : MonoBehaviour
                 return;
             }
             timer = plushySpawner.GetComponent<PlushySpawnerScript>().timeBetweenWaves;
-            Debug.Log(timer);
             existsWave = false;
             currentWave++;
             timerInformation.SetActive(true);
@@ -144,7 +143,8 @@ public class LevelLogicScript : MonoBehaviour
 
     public void MainMenu()
     {
-        Debug.Log("GO MAIN MENU");
+        PlayerPrefs.SetInt("HasSavefile", 0);
+        PlayerPrefs.Save();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }

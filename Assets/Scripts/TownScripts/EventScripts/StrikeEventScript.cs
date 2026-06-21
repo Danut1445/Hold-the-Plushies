@@ -41,6 +41,7 @@ public class StrikeEventScript : BasicEventScript
         leatherFactory.SetInput2(leatherFactory.GetInput2() * 70 / 100);
         leatherFactory.SetOutput1(leatherFactory.GetOutput1() * 70 / 100);
         PlayerStats.GetBuilding(2).ResetBuilding();
+        GameObject.FindGameObjectWithTag("Logic").GetComponent<TownLogicScript>().UpdateUIReputation();
         EventCanvas.SetActive(false);
     }
 
