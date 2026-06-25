@@ -32,6 +32,7 @@ public class LevelLogicScript : MonoBehaviour
     private int numberEnemies;
     private float timer;
     private int currentWave;
+    private bool frameWait;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class LevelLogicScript : MonoBehaviour
         spawningWaveActive = true;
         existsWave = true;
         finnishedAllWaves = false;
+        frameWait = false;
         currentWave = 1;
         currentHealth = PlayerStats.GetGuards();
         plushySpawner.GetComponent<PlushySpawnerScript>().StartSpwaningNextWave();
@@ -54,11 +56,16 @@ public class LevelLogicScript : MonoBehaviour
     {
         if (spawningWaveActive)
         {
+            frameWait = false;
             return;
         }
 
-        if (existsWave && numberEnemies > 0)
+        if (numberEnemies > 0)
         {
+            return;
+        } else if (!frameWait)
+        {
+            frameWait = true;
             return;
         }
 

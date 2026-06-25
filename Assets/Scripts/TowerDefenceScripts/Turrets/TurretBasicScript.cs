@@ -87,6 +87,7 @@ public class TurretBasicScript : UpgradableTurretScript
 
         if (currentTarget == null)
         {
+            wasInRange = false;
             turretBody.rotation = 0;
             if (targets.Count == 0)
             {
@@ -122,7 +123,6 @@ public class TurretBasicScript : UpgradableTurretScript
                 }
                 currentTarget = targets.Dequeue();
             }
-            wasInRange = false;
         } 
         else
         {

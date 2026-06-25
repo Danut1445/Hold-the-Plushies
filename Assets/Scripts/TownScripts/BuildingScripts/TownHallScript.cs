@@ -31,6 +31,7 @@ public class TownHallScript : BuildingBasicScript
         PlayerStats.AddBuilding(this);
 
         UIScript = gameObject.GetComponent<BuildingUIScript>();
+        UIScript.SetUpgradeButton(false);
         UIScript.SetImage(level);
         if (level > 0)
         {
