@@ -43,4 +43,9 @@ public class BallonMovement
             ballonRigidBody.position = (1.0f - currentProcentRoad) * lastTarget.Value + currentProcentRoad * currentTarget.Value;
         }
     }
+
+    public Vector2 GetNextCheckpoint()
+    {
+        return currentTarget.Value;
+    }
 }

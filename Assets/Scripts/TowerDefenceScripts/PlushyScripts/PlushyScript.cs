@@ -4,6 +4,7 @@ public class PlushyScript : MonoBehaviour
 {
     private BallonMovement ballonMovement;
     private LevelLogicScript levelLogic;
+    private AbstractAimingScript aimingScript;
     public float speed;
     public int health;
     public int baseDamage;
@@ -24,6 +25,7 @@ public class PlushyScript : MonoBehaviour
 
         levelLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>();
         levelLogic.IncreaseNumberEnemies(1);
+        aimingScript = new AdvancedAimingScript();
     }
 
     // Update is called once per frame
@@ -41,6 +43,14 @@ public class PlushyScript : MonoBehaviour
             levelLogic.DecreaseNumberEnemies(1);
             levelLogic.gainMoney(value);
         }
+    }
+
+    public Vector2 GetLocationToAim(Vector3 turretLocation, float bulletSpeed)
+    {
+        Vector2 currentLocation = new Vector2(transform.position.x, transform.position.y);
+        Vector2 heading = ballonMovement.GetNextCheckpoint() - currentLocation;
+        heading.Normalize();
+        return aimingScript.GetTargetLocation(currentLocation, heading, new Vector2(turretLocation.x, turretLocation.y), bulletSpeed, speed);
     }
 
     public int DoDamageToBase()

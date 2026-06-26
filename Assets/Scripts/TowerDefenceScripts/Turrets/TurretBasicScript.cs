@@ -126,7 +126,8 @@ public class TurretBasicScript : UpgradableTurretScript
         } 
         else
         {
-            float distanceToTarget = Vector2.Distance(new Vector2(currentTarget.transform.position.x, currentTarget.transform.position.y), turretLocation);
+            Vector2 aimingLocation = currentTarget.GetComponent<PlushyScript>().GetLocationToAim(turretLocation, bulletSpeed);
+            float distanceToTarget = Vector2.Distance(aimingLocation, turretLocation);
             if (distanceToTarget <= range)
             {
                 wasInRange = true;
@@ -139,9 +140,9 @@ public class TurretBasicScript : UpgradableTurretScript
                 return;
             }
 
-            Vector2 heading = new Vector2(currentTarget.transform.position.x - turretLocation.x, currentTarget.transform.position.y - turretLocation.y).normalized;
+            Vector2 heading = new Vector2(aimingLocation.x - turretLocation.x, aimingLocation.y - turretLocation.y).normalized;
             float angle = Vector2.Angle(new Vector2(0, 1), heading);
-            if (turretLocation.x < currentTarget.transform.position.x)
+            if (turretLocation.x < aimingLocation.x)
             {
                 angle = angle * -1;
             }
