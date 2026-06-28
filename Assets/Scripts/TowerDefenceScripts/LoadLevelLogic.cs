@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LoadLevelLogic : MonoBehaviour
 {
-    private LinkedList<Vector2> checkpoints = new LinkedList<Vector2>();
+    private LinkedList<CheckpointScript> checkpoints = new LinkedList<CheckpointScript>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,11 +22,11 @@ public class LoadLevelLogic : MonoBehaviour
         
         foreach (CheckpointScript checkpoint in checkpointScripts)
         {
-            checkpoints.AddLast(checkpoint.GetCoordonates());
+            checkpoints.AddLast(checkpoint);
         }
     }
 
-    public LinkedList<Vector2> GetCheckpoints()
+    public LinkedList<CheckpointScript> GetCheckpoints()
     {
         return checkpoints;
     }

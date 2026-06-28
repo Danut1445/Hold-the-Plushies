@@ -9,6 +9,7 @@ public class PlushyPlatoon
     public float interval;
     public float timer;
     public int enemyID;
+    public int divisionID;
 
     public PlushyPlatoon(int enemyID, int count, float interval)
     {
@@ -28,7 +29,8 @@ public class PlushyPlatoon
         timer -= timePassed;
         if (timer <= 0)
         {
-            GameObject.Instantiate(this.plushy, location, Quaternion.identity);
+            GameObject newEnemy = GameObject.Instantiate(this.plushy, location, Quaternion.identity);
+            newEnemy.GetComponent<PlushyScript>().setDivisionID(divisionID);
             count--;
             timer = interval;
             if (count <= 0)

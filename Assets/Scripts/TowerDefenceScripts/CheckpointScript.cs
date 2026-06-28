@@ -5,7 +5,8 @@ using UnityEngine;
 public class CheckpointScript : MonoBehaviour, IComparable
 {
     public int order;
-    private Vector3 coordonates;
+    public int divisionID;
+    private Vector2 coordonates;
     private GameObject[] checkpoints;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,7 +40,7 @@ public class CheckpointScript : MonoBehaviour, IComparable
 
     public Vector2 GetCoordonates()
     {
-        return new Vector2(coordonates.x, coordonates.y);
+        return coordonates;
     }
 
     int IComparable.CompareTo(object otherCheckpoint)

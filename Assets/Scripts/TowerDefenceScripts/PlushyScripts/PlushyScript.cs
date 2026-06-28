@@ -5,6 +5,7 @@ public class PlushyScript : MonoBehaviour
     private BallonMovement ballonMovement;
     private LevelLogicScript levelLogic;
     private AbstractAimingScript aimingScript;
+    private int divisionID;
     public float speed;
     public int health;
     public int baseDamage;
@@ -15,7 +16,7 @@ public class PlushyScript : MonoBehaviour
     {
         ballonMovement = new BallonMovement();
         Rigidbody2D ballonRigidBody = gameObject.GetComponent<Rigidbody2D>();
-        ballonMovement.initializeMovement(ballonRigidBody, speed);
+        ballonMovement.initializeMovement(ballonRigidBody, speed, divisionID);
 
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         foreach (GameObject turret in turrets)
@@ -58,5 +59,10 @@ public class PlushyScript : MonoBehaviour
         Destroy(gameObject);
         levelLogic.DecreaseNumberEnemies(1);
         return baseDamage;
+    }
+
+    public void setDivisionID(int ID)
+    {
+        divisionID = ID;
     }
 }
