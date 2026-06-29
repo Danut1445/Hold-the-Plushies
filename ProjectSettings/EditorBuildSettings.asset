@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TowerDefenceLevel2.unity
     guid: decfb0c822c487f4e9f2f68046fcc698
   - enabled: 1
+    path: Assets/Scenes/TowerDefenceLevel3.unity
+    guid: f9cadff9c874b14439b8f6962645eab6
+  - enabled: 1
     path: Assets/Scenes/EndGame.unity
     guid: 9a69c36efbd61ca45972e8debc9f1f56
   - enabled: 1

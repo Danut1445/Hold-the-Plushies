@@ -1,0 +1,72 @@
+{
+    "waves": [
+        {
+            "wave": [
+                {
+                    "count": 4,
+                    "interval": 3.0,
+                    "timer": 3.0,
+                    "enemyID": 0,
+                    "divisionID": 1
+                },
+                {
+                    "count": 6,
+                    "interval": 4.5,
+                    "timer": 1.0,
+                    "enemyID": 0,
+                    "divisionID": 2
+                }
+            ]
+        },
+        {
+            "wave": [
+                {
+                    "count": 6,
+                    "interval": 2.0,
+                    "timer": 2.0,
+                    "enemyID": 0,
+                    "divisionID": 1
+                },
+                {
+                    "count": 10,
+                    "interval": 3.0,
+                    "timer": 1.0,
+                    "enemyID": 0,
+                    "divisionID": 2
+                },
+                {
+                    "count": 6,
+                    "interval": 2.5,
+                    "timer": 1.0,
+                    "enemyID": 0,
+                    "divisionID": 1
+                }
+            ]
+        },
+        {
+            "wave": [
+                {
+                    "count": 12,
+                    "interval": 1.5,
+                    "timer": 0.0,
+                    "enemyID": 0,
+                    "divisionID": 2
+                },
+                {
+                    "count": 15,
+                    "interval": 3.0,
+                    "timer": 3.0,
+                    "enemyID": 0,
+                    "divisionID": 1
+                },
+                {
+                    "count": 12,
+                    "interval": 2,
+                    "timer": 1.0,
+                    "enemyID": 0,
+                    "divisionID": 2
+                }
+            ]
+        }
+    ]
+}

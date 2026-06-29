@@ -652,6 +652,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1372603747}
     m_Modifications:
+    - target: {fileID: 768237958686597802, guid: ddcc938867414cc488bd9bcc4e157b19, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 961840918753832257, guid: ddcc938867414cc488bd9bcc4e157b19, type: 3}
       propertyPath: m_Interactable
       value: 1
@@ -747,7 +751,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3407483327873696104, guid: ddcc938867414cc488bd9bcc4e157b19, type: 3}
       propertyPath: m_Name
-      value: Policy2Choices
+      value: PolicyHousing
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407483327873696104, guid: ddcc938867414cc488bd9bcc4e157b19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3548984422753359072, guid: ddcc938867414cc488bd9bcc4e157b19, type: 3}
       propertyPath: m_text
@@ -877,6 +885,192 @@ MonoBehaviour:
   notChoosableCanvas: {fileID: 1631486969}
   button1stChoice: {fileID: 1907175151}
   button2ndChoice: {fileID: 146057288}
+--- !u!1001 &939872114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1372603747}
+    m_Modifications:
+    - target: {fileID: 4875762623095386294, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5228260545182285856, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678199073168068813, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_Name
+      value: PolicyAiming
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 939872117}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChooseOption
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PolicyAdvancedAimingScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526664034515371034, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277577829868429158, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_text
+      value: 'Improves the aiming of our troops at the cost of the weapons factory
+        needing more resources.
+
+        ->Makes the towers aim better
+
+        +25%
+        to resource input of the weapons factory (except workers)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.49685073
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.3649707
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.144475
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5678199073168068813, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 939872117}
+  m_SourcePrefab: {fileID: 100100000, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+--- !u!224 &939872115 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8883953889811482011, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+  m_PrefabInstance: {fileID: 939872114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &939872116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678199073168068813, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+  m_PrefabInstance: {fileID: 939872114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &939872117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939872116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d979184ac90cb2a488b284aab25e1c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requirementsIn: []
+  requirementsOut: []
+  notChoosableCanvas: {fileID: 939872118}
+  button1stChoice: {fileID: 939872119}
+--- !u!1 &939872118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3714781610295973345, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+  m_PrefabInstance: {fileID: 939872114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &939872119 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5925072074631721177, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+  m_PrefabInstance: {fileID: 939872114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1086219523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1377,7 @@ Transform:
   - {fileID: 1997089792}
   - {fileID: 2033906851}
   - {fileID: 891093804}
+  - {fileID: 939872115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1372603748
@@ -1430,9 +1625,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4875762623095386294, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5678199073168068813, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
       propertyPath: m_Name
-      value: Policy1Choice
+      value: Policy10HrWorkshift
       objectReference: {fileID: 0}
     - target: {fileID: 5678199073168068813, guid: 0766c88ca73296a4db41368ea06d6c89, type: 3}
       propertyPath: m_IsActive

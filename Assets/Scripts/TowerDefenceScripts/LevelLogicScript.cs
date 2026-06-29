@@ -60,14 +60,21 @@ public class LevelLogicScript : MonoBehaviour
             return;
         }
 
+        if (numberEnemies < 0)
+        {
+            Debug.Log("Something is wrong!!!");
+        }
+        //Debug.Log("Framewait + number enemies:" + numberEnemies + " " + frameWait);
         if (numberEnemies > 0)
         {
+            frameWait = false;
             return;
         } else if (!frameWait)
         {
             frameWait = true;
             return;
         }
+        //Debug.Log("Framewait + number enemies after:" + numberEnemies + " " + frameWait);
 
         if (existsWave)
         {
@@ -98,6 +105,7 @@ public class LevelLogicScript : MonoBehaviour
 
     private void WinGame()
     {
+        Debug.Log("Victory!!");
         winScreen.SetActive(true);
         reputationGainedText.SetText("10");
         reputationGainedMoneyText.SetText(Mathf.Min(10, currentMoney / 20).ToString());

@@ -22,6 +22,7 @@ public class TurretBasicScript : UpgradableTurretScript
     private LinkedList<GameObject> officers;
     private GameObject supremeOfficer;
     private int supremeOfficerLevel;
+    private float timer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,6 +88,7 @@ public class TurretBasicScript : UpgradableTurretScript
 
         if (currentTarget == null)
         {
+            timer = 3.0f;
             wasInRange = false;
             turretBody.rotation = 0;
             if (targets.Count == 0)
@@ -131,6 +133,14 @@ public class TurretBasicScript : UpgradableTurretScript
             if (distanceToTarget <= range)
             {
                 wasInRange = true;
+            } else
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0f)
+                {
+                    currentTarget = null;
+                    return;
+                }
             }
             
             if (distanceToTarget > range && wasInRange == true)

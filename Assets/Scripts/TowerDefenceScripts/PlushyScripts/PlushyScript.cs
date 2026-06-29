@@ -26,7 +26,13 @@ public class PlushyScript : MonoBehaviour
 
         levelLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LevelLogicScript>();
         levelLogic.IncreaseNumberEnemies(1);
-        aimingScript = new AdvancedAimingScript();
+        if (PlayerStats.GetPolicy(3).GetChoiceMade() == 0)
+        {
+            aimingScript = new BasicAimingScript();
+        } else
+        {
+            aimingScript = new AdvancedAimingScript();
+        }
     }
 
     // Update is called once per frame
